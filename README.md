@@ -1,5 +1,11 @@
 # NixOS Configuration
 
+## macOS manual
+
+```sh
+softwareupdate --install-rosetta --agree-to-license
+```
+
 ## Installation
 
 ```sh

@@ -26,15 +26,28 @@
       # Create /etc/zshrc that loads the nix-darwin environment.
       programs.zsh.enable = true;  # default shell on catalina
 
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
-
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      system.stateVersion = 4;
-
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
+      system = {
+        # Set Git commit hash for darwin-version.
+        configurationRevision = self.rev or self.dirtyRev or null;
+
+        # Used for backwards compatibility, please read the changelog before changing.
+        # $ darwin-rebuild changelog
+        stateVersion = 4;
+
+        defaults = {
+          universalaccess.reduceMotion = true;
+          universalaccess.reduceTransparency = true;
+        };
+      };
+
+      # Install Rosetta 2 to support x86_64-darwin
+      # $ softwareupdate --install-rosetta --agree-to-license
+      nix.extraOptions = ''
+        extra-platforms = x86_64-darwin aarch64-darwin
+      '';
     };
   in
   {
