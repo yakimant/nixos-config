@@ -20,8 +20,10 @@
       services.nix-daemon.enable = true;
       # nix.package = pkgs.nix;
 
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
+      # Linux builder to support x86_64-linux
+      nix.linux-builder.enable = true;
+      nix.settings.trusted-users = ["@admin"];
+      nix.linux-builder.package = pkgs.darwin.linux-builder-x86_64;
 
       # Create /etc/zshrc that loads the nix-darwin environment.
       programs.zsh.enable = true;  # default shell on catalina
