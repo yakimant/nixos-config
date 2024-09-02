@@ -16,7 +16,10 @@
         jq
         skhd
         yabai
+        vault
       ];
+
+      nixpkgs.config.allowUnfree = true;
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
@@ -37,7 +40,7 @@
               diskSize = 40 * 1024;
               memorySize = 8 * 1024;
             };
-            cores = 4;
+            cores = 6;
           };
         };
       };
