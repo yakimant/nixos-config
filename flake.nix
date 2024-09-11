@@ -2,7 +2,7 @@
   description = "Example Darwin system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -13,10 +13,20 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
-        jq
-        skhd
-        yabai
-        vault
+          ansible
+          bitwarden-cli
+          direnv
+          fzf
+          gnupg
+          go
+          jq
+          neovim
+          openssh
+          pass
+          pinentry_mac
+          skhd
+          vault
+          yabai
       ];
 
       nixpkgs.config.allowUnfree = true;
@@ -31,7 +41,8 @@
       # Linux builder to support x86_64-linux
       nix.linux-builder = {
         enable = true;
-        ephemeral = true;
+        # uncomment to have a clean VM
+        #ephemeral = true;
         package = pkgs.darwin.linux-builder-x86_64;
         maxJobs = 4;
         config = {
