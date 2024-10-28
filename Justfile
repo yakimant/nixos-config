@@ -11,3 +11,6 @@ nixos-rebuild config host:
   nixos-rebuild switch --flake .#{{ config }} \
   --fast --build-host {{ host }} \
   --use-remote-sudo --target-host {{ host }}
+
+nix-repl:
+  nix repl --file repl.nix
