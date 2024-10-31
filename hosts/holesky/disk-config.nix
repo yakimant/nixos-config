@@ -29,12 +29,33 @@
                 #mountOptions = [ "umask=0077" ];
               };
             };
-            zfs = {
-              name = "zfs";
+            zfs_main = {
+              name = "zfs_main";
               size = "100%";
               content = {
                 type = "zfs";
                 pool = "zroot";
+              };
+            };
+          };
+        };
+      };
+      data = {
+        device = "/dev/sdb";
+        type = "disk";
+#content = {
+#          type = "zfs";
+#          pool = "zdata";
+#        };
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs_data = {
+              name = "zfs_data";
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "zdata";
               };
             };
           };
@@ -55,17 +76,32 @@
         options.ashift = "12";
 
         datasets = {
-          "local" = {
-            type = "zfs_fs";
-            options.mountpoint = "none";
-          };
-          "local/root" = {
+          "root" = {
             type = "zfs_fs";
             mountpoint = "/";
           };
-          "local/nix" = {
+          "nix" = {
             type = "zfs_fs";
             mountpoint = "/nix";
+          };
+        };
+      };
+      zdata = {
+        type = "zpool";
+        rootFsOptions = {
+          # https://wiki.archlinux.org/title/Install_Arch_Linux_on_ZFS
+          acltype = "posixacl";
+          atime = "off";
+          compression = "zstd";
+          mountpoint = "none";
+          xattr = "sa";
+        };
+        options.ashift = "12";
+
+        datasets = {
+          "data" = {
+            type = "zfs_fs";
+            mountpoint = "/data";
           };
         };
       };

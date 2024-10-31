@@ -1,6 +1,10 @@
 { inputs, pkgs, ... }:
 
 {
+  imports = [
+    ../../modules/basic-tools.nix
+  ];
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
@@ -9,32 +13,19 @@
       cachix
       cf-terraforming
       colima
-      coreutils
       direnv
       docker
       fswatch
-      fzf
-      gawk
-      gnumake
       gnupg
       go
-      htop
-      jq
-      just
       makefile2graph
-      neovim
+      nixos-anywhere
       nixos-rebuild
-      nmap
-      openssh
       pass
       pinentry_mac
       pkg-config
-      python311
-      ripgrep
-      rsync
       skhd
       terraformer
-      tldr
       vault
       yabai
       yubikey-manager
@@ -47,7 +38,6 @@
   # nix.package = pkgs.nix;
 
   # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
 
   # Linux builder to support x86_64-linux
   nix.linux-builder = {
@@ -66,7 +56,22 @@
       };
     };
   };
-  nix.settings.trusted-users = ["@admin"];
+
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+#nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  nix.channel.enable = false;
+  environment.etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs}";
+
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    trusted-users = ["status" "@admin"];
+    substituters = [
+      "https://cache.nixos.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    ];
+  };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;  # default shell on catalina
