@@ -1,16 +1,21 @@
+BUILD_HOST := 'linux-02.he-eu-hel1.ci.release'
+
 default:
   @just --list
 
-nixos-anywhere config host:
-  nixos-anywhere --build-on-remote --flake .#{{ config }} root@{{ host }}
+update:
+  nix flake update
 
-darwin-rebuild:
+nixos-anywhere host:
+  nixos-anywhere --build-on-remote --flake .#{{ host }} root@{{ host }}
+
+darwin:
   darwin-rebuild switch --flake .
 
-nixos-rebuild config host:
-  nixos-rebuild switch --flake .#{{ config }} \
+nixos host:
+  nixos-rebuild switch --flake .#{{ host }} \
   --fast --build-host {{ host }} \
   --use-remote-sudo --target-host {{ host }}
 
-nix-repl:
+repl:
   nix repl --file repl.nix
