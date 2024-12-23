@@ -51,9 +51,13 @@
         enable = false;
         port = 5052;
       };
+      payload-builder = {
+        enable = true;
+        url = "http://127.0.0.1:18550";
+      };
     };
     extraArgs = [
-      "--log-level=INFO"
+      "--local-block-value-boost=0"
     ];
   };
 

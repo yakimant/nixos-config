@@ -5,6 +5,7 @@ TODO:
 - [ ] swap volume for nimbus build
 - [ ] disko: data volume without partitions
 - [ ] setup date sync (timedatectl?)
+- [ ] fix reboot - ZFS issue
 
 Setup:
 1. nixos-anywhere
