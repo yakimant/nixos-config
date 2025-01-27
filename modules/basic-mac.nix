@@ -40,7 +40,7 @@
       just
       makefile2graph
       mdbook
-      nerdfonts
+      (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
       nixos-anywhere
       nixos-rebuild
       pass
@@ -49,7 +49,7 @@
       pkg-config
       postgresql_16
       qrencode
-#qsv
+      #qsv
       s5cmd
       shellcheck
       signal-cli
@@ -175,7 +175,6 @@
       { greedy = true; name = "alacritty"; }
       { greedy = true; name = "android-commandlinetools"; }
       { greedy = true; name = "balenaetcher"; }
-      #{ greedy = true; name = "bartender"; }
       { greedy = true; name = "bluestacks"; }
       { greedy = true; name = "brave-browser"; }
       { greedy = true; name = "bruno"; }
@@ -183,21 +182,17 @@
       { greedy = true; name = "chromium"; }
       { greedy = true; name = "cold-turkey-blocker"; }
       { greedy = true; name = "cyberduck"; }
-#{ greedy = true; name = "dash"; }
       { greedy = true; name = "db-browser-for-sqlite"; }
       { greedy = true; name = "dbeaver-community"; }
       { greedy = true; name = "discord"; }
       { greedy = true; name = "dropbox"; }
       { greedy = true; name = "element"; }
       { greedy = true; name = "firefox"; }
-      #{ greedy = true; name = "font-fira-code-nerd-font"; }
       { greedy = true; name = "github"; }
-#      { greedy = true; name = "gnucash"; }
       { greedy = true; name = "google-chrome"; }
       { greedy = true; name = "google-cloud-sdk"; }
       { greedy = true; name = "google-drive"; }
       { greedy = true; name = "gotomeeting"; }
-      #{ greedy = true; name = "grandperspective"; }
       { greedy = true; name = "jordanbaird-ice"; }
       { greedy = true; name = "kaleidoscope"; }
       { greedy = true; name = "karabiner-elements"; }
@@ -228,7 +223,6 @@
       { greedy = true; name = "slack"; }
       { greedy = true; name = "spaceman"; }
       { greedy = true; name = "spotify"; }
-      #{ greedy = true; name = "sublime-text"; }
       { greedy = true; name = "tailscale"; }
       { greedy = true; name = "tableau-public"; }
       { greedy = true; name = "telegram"; }
