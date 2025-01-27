@@ -54,9 +54,16 @@
         };
       });
 
-      darwinConfigurations."yakimant-macbook-air" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."macbook-air" = nix-darwin.lib.darwinSystem {
         modules = [
           ./hosts/macbook-air/configuration.nix
+        ];
+        specialArgs = { inherit inputs; nixpkgs = nixpkgs-darwin; };
+      };
+
+      darwinConfigurations."mac-mini" = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./hosts/mac-mini/configuration.nix
         ];
         specialArgs = { inherit inputs; nixpkgs = nixpkgs-darwin; };
       };

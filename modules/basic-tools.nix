@@ -8,11 +8,7 @@
     ]
     );
   in with pkgs; [
-      age
-      age-plugin-yubikey
-      ansible_2_16
-      ansible-lint
-      coreutils
+            #      coreutils
       curl
       fastfetch
       fzf
@@ -21,13 +17,11 @@
       gnumake
       htop
       jq
-      just
       neovim
-#      ncdu
+#     ncdu # move from linux-tools when mac issues fixed
       nmap
       openssh
 #openssl
-      passage
       python311
 #pythonPackages
       ripgrep
