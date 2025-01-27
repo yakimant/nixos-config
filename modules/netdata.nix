@@ -14,8 +14,7 @@
     enable = true;
   };
 
-#  networking.firewall = {
-#    allowedTCPPorts = [ 30303 ];
-#    allowedUDPPorts = [ 30303 ];
-#  };
+  networking.firewall = {
+    allowedTCPPorts = [ 19999 ];
+  };
 }

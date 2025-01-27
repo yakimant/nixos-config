@@ -8,10 +8,16 @@
     ]
     );
   in with pkgs; [
-            #      coreutils
+      #      coreutils
+mtr
+iperf
+mosh
+      btop
+      aria2
       curl
       fastfetch
       fzf
+      fswatch
       gawk
       git
       gnumake
@@ -20,6 +26,7 @@
       neovim
 #     ncdu # move from linux-tools when mac issues fixed
       nmap
+tree
       openssh
 #openssl
       python311
@@ -30,5 +37,9 @@
       tmux
       wget
       zsh
+      hyperfine
+socat
+speedtest-cli
+inetutils
   ];
 }
