@@ -156,7 +156,7 @@
 
     masApps = {
       "Amphetamine" = 937984704;
-      "Bitwarden" = 1352778147;
+      #"Bitwarden" = 1352778147; # causing troubles to skhd
       "Endel" = 1346247457;
       #"Gapplin" = 768053424; #name changed?
       "Keynote" = 409183694;

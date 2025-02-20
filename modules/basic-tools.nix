@@ -8,7 +8,7 @@
     ]
     );
   in with pkgs; [
-      #      coreutils
+      coreutils
 mtr
 iperf
 mosh
