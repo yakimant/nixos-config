@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-2311.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs-2405.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
 
     #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -20,8 +24,13 @@
     };
 
     ethereum-nix = {
-      url = "github:nix-community/ethereum.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #url = "github:nix-community/ethereum.nix/";
+      url = "github:metacraft-labs/ethereum.nix/3b34218a88c25e2e8801e87875b2572155843f32";
+      inputs = {
+        nixpkgs.follows = "nixpkgs-2405";
+        nixpkgs-2311.follows = "nixpkgs-2311";
+        nixpkgs-unstable.follows = "nixpkgs-unstable";
+      };
     };
   };
 
@@ -34,7 +43,7 @@
     ];
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-darwin, nix-darwin, disko, ethereum-nix }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-darwin, nix-darwin, disko, ethereum-nix, ... }:
     let
       stableSystems = ["x86_64-linux" "aarch64-darwin"];
       forAllSystems = nixpkgs.lib.genAttrs stableSystems;
