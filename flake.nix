@@ -2,8 +2,8 @@
   description = "infra-yakimant";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
 
     #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # See https://github.com/NixOS/nixpkgs/issues/107466

@@ -23,7 +23,7 @@
       #ansible-lint
       #ansible_2_16
       awscli2
-      bitwarden-cli
+      #bitwarden-cli # doesnt compile
       cachix
       cf-terraforming
       colima
