@@ -90,6 +90,15 @@
         specialArgs = { inherit inputs; };
       };
 
+      nixosConfigurations."thinkpad" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          disko.nixosModules.disko
+          ./hosts/thinkpad/configuration.nix
+        ];
+        specialArgs = { inherit inputs; };
+      };
+
       # Expose the package set, including overlays, for convenience.
       #darwinPackages = self.darwinConfigurations."yakimant-macbook-air".pkgs;
     };
