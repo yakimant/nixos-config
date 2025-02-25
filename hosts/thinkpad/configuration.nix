@@ -27,5 +27,5 @@
   networking.hostId = "0e9a6b56";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }
