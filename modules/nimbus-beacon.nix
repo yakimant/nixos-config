@@ -48,7 +48,7 @@
         port = 5054;
       };
       rest = {
-        enable = false;
+        enable = true;
         port = 5052;
       };
       payload-builder = {
