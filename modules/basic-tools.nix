@@ -8,38 +8,38 @@
     ]
     );
   in with pkgs; [
-      coreutils
-mtr
-iperf
-mosh
-      btop
       aria2
+      btop
+      coreutils
       curl
       fastfetch
-      fzf
       fswatch
+      fzf
       gawk
       git
       gnumake
       htop
+      hyperfine
+      inetutils
+      iperf
       jq
+      mosh
+      mtr
+#ncdu # move from linux-tools when mac issues fixed
       neovim
-#     ncdu # move from linux-tools when mac issues fixed
       nmap
-tree
       openssh
 #openssl
       python311
 #pythonPackages
       ripgrep
       rsync
+      socat
+      speedtest-cli
       tldr
       tmux
+      tree
       wget
       zsh
-      hyperfine
-socat
-speedtest-cli
-inetutils
   ];
 }
