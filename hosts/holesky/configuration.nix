@@ -35,8 +35,10 @@
     };
   };
 
-  # random number, required for ZFS
-  networking.hostId = "4d57ec25";
+  networking = {
+    hostName = "holesky";
+    hostId = "4d57ec25"; # random number, required for ZFS
+  };
 
   system.stateVersion = "24.05";
 }
