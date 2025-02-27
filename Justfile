@@ -9,11 +9,13 @@ update:
 nixos-anywhere host:
   nixos-anywhere --build-on-remote --flake .#{{ host }} root@{{ host }}
 
-disko-install host disk:
-  sudo nix --extra-experimental-features 'nix-command flakes' \
-  run 'github:nix-community/disko/latest#disko-install' -- \
-  --flake .#{{ host }}  --write-efi-boot-entries \
-  --disk main {{ disk }}
+disko-install host: #disk:
+  # https://github.com/nix-community/disko/issues/947
+  #sudo disko-install \
+  #--flake .#{{ host }}  --write-efi-boot-entries \
+  #--disk main {{ disk }}
+  sudo disko --mode disko --flake .#{{ host }}
+  sudo nixos-install --no-channel-copy --no-root-password --flake .#{{ host }}
 
 darwin:
   darwin-rebuild switch --flake .

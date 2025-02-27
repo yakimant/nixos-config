@@ -59,6 +59,7 @@
             just
             nix-output-monitor
             nixos-anywhere
+            #disko
           ];
         };
       });
