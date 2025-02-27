@@ -6,8 +6,9 @@
 
 {
   imports = [
-    ../../modules/basic-tools.nix
-    ../../modules/linux-tools.nix
+    ../../modules/basic.nix
+    ../../modules/tools-basic.nix
+    ../../modules/tools-linux.nix
     ../../modules/nimbus-beacon.nix
     ../../modules/geth.nix
     ../../modules/mev-boost.nix
