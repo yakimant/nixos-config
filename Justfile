@@ -15,13 +15,16 @@ disko-install host disk:
   --flake .#{{ host }}  --write-efi-boot-entries \
   --disk main {{ disk }}
 
-darwin-rebuild:
+darwin:
   darwin-rebuild switch --flake .
 
-nixos-rebuild host:
+nixos-remote host:
   nixos-rebuild switch --flake .#{{ host }} \
   --fast --build-host {{ host }} \
   --use-remote-sudo --target-host {{ host }}
+
+nixos:
+  sudo nixos-rebuild switch --flake .
 
 # TODO: cleanup/enable experiments
 #nixos1 host:
