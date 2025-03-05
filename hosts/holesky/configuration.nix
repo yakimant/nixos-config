@@ -7,6 +7,7 @@
 {
   imports = [
     ../../modules/basic.nix
+    ../../modules/basic-linux.nix
     ../../modules/tools-basic.nix
     ../../modules/tools-linux.nix
     ../../modules/nimbus-beacon.nix

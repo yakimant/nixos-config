@@ -22,6 +22,19 @@
     };
   };
 
+  nix.distributedBuilds = true;
+  nix.buildMachines = [
+    {
+      hostName = "linux-02.he-eu-hel1.ci.release.status.im";
+      protocol = "ssh-ng";
+      maxJobs = 24;
+      system = "x86_64-linux";
+      sshUser = "yakimant";
+      #publicHostKey = "";
+      sshKey = "/Users/status/.ssh/id_ed25519";
+    }
+  ];
+
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -44,4 +57,8 @@
   nix.extraOptions = ''
     extra-platforms = x86_64-darwin aarch64-darwin
   '';
+
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs-darwin}" ];
+  nix.registry.nixpkgs.flake = inputs.nixpkgs-darwin;
+  environment.etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs-darwin}";
 }

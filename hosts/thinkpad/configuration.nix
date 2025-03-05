@@ -5,6 +5,8 @@
 {
   imports = [
     ../../modules/basic.nix
+    ../../modules/basic-linux.nix
+    ../../modules/nix.nix
     ../../modules/tools-basic.nix
     ../../modules/tools-linux.nix
     ../../modules/tools-desktop.nix
