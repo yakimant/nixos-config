@@ -1,20 +1,28 @@
 {
   description = "infra-yakimant";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-2311.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs-2405.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
+    nixpkgs-2411.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.follows = "nixpkgs-2411";
 
-    #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # See https://github.com/NixOS/nixpkgs/issues/107466
     #nixpkgs-darwin-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
+    
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:LnL7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
@@ -24,23 +32,15 @@
     };
 
     ethereum-nix = {
-      #url = "github:nix-community/ethereum.nix/";
-      url = "github:metacraft-labs/ethereum.nix/3b34218a88c25e2e8801e87875b2572155843f32";
+      url = "github:nix-community/ethereum.nix";
+      #url = "github:metacraft-labs/ethereum.nix/3b34218a88c25e2e8801e87875b2572155843f32";
+      #url = "github:metacraft-labs/ethereum.nix";
       inputs = {
         nixpkgs.follows = "nixpkgs-2405";
         nixpkgs-2311.follows = "nixpkgs-2311";
         nixpkgs-unstable.follows = "nixpkgs-unstable";
       };
     };
-  };
-
-  nixConfig = {
-    extra-substituters = [
-      "https://nix-community.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-darwin, nix-darwin, disko, ethereum-nix, ... }:
