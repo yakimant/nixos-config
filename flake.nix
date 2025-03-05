@@ -100,6 +100,15 @@
         specialArgs = { inherit inputs; };
       };
 
+      nixosConfigurations."qnap" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          disko.nixosModules.disko
+          ./hosts/qnap/configuration.nix
+        ];
+        specialArgs = { inherit inputs; };
+      };
+
       # Expose the package set, including overlays, for convenience.
       #darwinPackages = self.darwinConfigurations."yakimant-macbook-air".pkgs;
     };
