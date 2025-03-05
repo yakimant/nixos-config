@@ -1,5 +1,3 @@
-BUILD_HOST := 'linux-02.he-eu-hel1.ci.release'
-
 default:
   @just --list
 
@@ -9,45 +7,40 @@ update:
 nixos-anywhere host:
   nixos-anywhere --build-on-remote --flake .#{{ host }} root@{{ host }}
 
-disko-install host: #disk:
-  # https://github.com/nix-community/disko/issues/947
-  #sudo disko-install \
-  #--flake .#{{ host }}  --write-efi-boot-entries \
-  #--disk main {{ disk }}
+# TODO: switch to disko-install
+# https://github.com/nix-community/disko/issues/947
+#sudo disko-install \
+#--flake .#{{ host }}  --write-efi-boot-entries \
+#--disk main {{ disk }}
+disko-install host:
   sudo disko --mode disko --flake .#{{ host }}
   sudo nixos-install --no-channel-copy --no-root-password --flake .#{{ host }}
 
 darwin:
   darwin-rebuild switch --flake .
 
+# INFO: for remote builders:
+# configure https://nix.dev/manual/nix/2.26/command-ref/conf-file#conf-builders
 nixos-remote host:
   nixos-rebuild switch --flake .#{{ host }} \
-  --fast --build-host {{ host }} \
-  --use-remote-sudo --target-host {{ host }}
+  --use-remote-sudo --target-host {{ host }} \
+  --fast \
+  --use-substitutes
+  #--builders 'ssh://yakimant@{{ host }}.yakimant.io x86_64-linux - 16' \
+  #--build-host {{ host }} \
+  #--max-jobs 0 \
+
+nixos-remote-dry host:
+  nixos-rebuild dry-activate --flake .#{{ host }} \
+  --use-remote-sudo --target-host {{ host }} \
+  --fast \
+  --use-substitutes
 
 nixos:
   sudo nixos-rebuild switch --flake .
 
-# TODO: cleanup/enable experiments
-#nixos1 host:
-#  nixos-rebuild dry-build --flake .#{{ host }} \
-#  --fast --build-host {{ host }} \
-#  --use-remote-sudo --target-host {{ host }}
-#
-#nixos2 host:
-#  nixos-rebuild dry-activate --flake .#{{ host }} \
-#  --fast --build-host {{ host }} \
-#  --use-remote-sudo --target-host {{ host }}
-#
-#nixos3 host:
-#  nixos-rebuild dry-activate --flake .#{{ host }} \
-#  --fast --build-host {{ BUILD_HOST }} \
-#  --use-remote-sudo --target-host {{ host }}.yakimant.io
-#
-#nixos4 host:
-#  nixos-rebuild build -v --flake .#{{ host }} \
-#  --fast --build-host {{ BUILD_HOST }} \
-#  --use-remote-sudo --target-host {{ host }}.yakimant.io
+nixos-dry:
+  sudo nixos-rebuild dry-activate --flake .
 
 repl:
   nix repl --file repl.nix
