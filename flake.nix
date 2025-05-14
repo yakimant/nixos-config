@@ -26,6 +26,11 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,7 +48,14 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-darwin, nix-darwin, disko, ethereum-nix, ... }:
+  outputs = inputs@{ self,
+    disko,
+    ethereum-nix,
+    mac-app-util,
+    nix-darwin,
+    nixpkgs,
+    nixpkgs-darwin,
+    ... }:
     let
       stableSystems = ["x86_64-linux" "aarch64-darwin"];
       forAllSystems = nixpkgs.lib.genAttrs stableSystems;
@@ -66,6 +78,7 @@
 
       darwinConfigurations."macbook-air" = nix-darwin.lib.darwinSystem {
         modules = [
+          mac-app-util.darwinModules.default
           ./hosts/macbook-air/configuration.nix
         ];
         specialArgs = { inherit inputs; nixpkgs = nixpkgs-darwin; };
@@ -73,6 +86,7 @@
 
       darwinConfigurations."mac-mini" = nix-darwin.lib.darwinSystem {
         modules = [
+          mac-app-util.darwinModules.default
           ./hosts/mac-mini/configuration.nix
         ];
         specialArgs = { inherit inputs; nixpkgs = nixpkgs-darwin; };
