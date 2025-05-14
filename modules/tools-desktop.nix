@@ -1,9 +1,9 @@
 { pkgs, ... }:
 
-# node, python, go, perl, r, ruby ?
+# python, r, ruby ?
 
 {
-  # TODO: needed for matrix-commander
+  # INFO: needed for matrix-commander
   nixpkgs.config.permittedInsecurePackages = [
     "olm-3.2.16"
   ];
@@ -20,6 +20,7 @@
 #consul
       direnv
       docker
+#element-desktop # SSO doesn't work on macOS
       fd
       fq
       fswatch
@@ -30,15 +31,18 @@
       just
       matrix-commander
       makefile2graph
+      markdownlint-cli
       mdbook
       (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
       nixos-anywhere
       nixos-rebuild
+      nodejs_23
       pass
       passage
       pidgin
       pkg-config
       postgresql_16
+      qemu_kvm
       qrencode
 #qsv
       s5cmd
