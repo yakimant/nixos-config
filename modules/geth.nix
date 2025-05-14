@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  pkgs,
   ...
 }:
 
@@ -34,6 +35,18 @@
   services.ethereum.geth.holesky = {
     enable = true;
     package = inputs.ethereum-nix.packages.x86_64-linux.geth;
+    # INFO: to upgrade
+    #package = inputs.ethereum-nix.packages.x86_64-linux.geth.overrideAttrs (_ : rec {
+    #  version = "1.15.3";
+    #  src = pkgs.fetchFromGitHub {
+    #    owner = "ethereum";
+    #    repo = "go-ethereum";
+    #    rev = "v${version}";
+    #    hash = "sha256-G1xnIF9cF8xrEam/N3Y65odJS0yAf2F0vhtAwHQSfsQ=";
+    #  };
+    #  vendorHash = "";
+    #});
+
     args = {
       datadir = "/data/geth-holesky";
       network = "holesky";
