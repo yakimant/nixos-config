@@ -3,6 +3,10 @@
 # node, python, go, perl, r, ruby ?
 
 {
+  # TODO: needed for matrix-commander
+  nixpkgs.config.permittedInsecurePackages = [
+    "olm-3.2.16"
+  ];
   environment.systemPackages = with pkgs; [
       age
       age-plugin-yubikey
@@ -24,6 +28,7 @@
       go
       hugo
       just
+      matrix-commander
       makefile2graph
       mdbook
       (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
