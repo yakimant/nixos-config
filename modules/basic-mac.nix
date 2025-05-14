@@ -23,17 +23,19 @@
   };
 
   nix.distributedBuilds = true;
-  nix.buildMachines = [
-    {
-      hostName = "linux-02.he-eu-hel1.ci.release.status.im";
-      protocol = "ssh-ng";
-      maxJobs = 24;
-      system = "x86_64-linux";
-      sshUser = "yakimant";
-      #publicHostKey = "";
-      sshKey = "/Users/status/.ssh/id_ed25519";
-    }
-  ];
+
+  # TODO: setup a machine for personal needs
+  #nix.buildMachines = [
+  #  {
+  #    hostName = "some host";
+  #    protocol = "ssh-ng";
+  #    maxJobs = 16;
+  #    system = "x86_64-linux";
+  #    sshUser = "yakimant";
+  #    #publicHostKey = "";
+  #    #sshKey = "/Users/status/.ssh/id_ed25519_sk_no_touch";
+  #  }
+  #];
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
@@ -56,6 +58,7 @@
   # $ softwareupdate --install-rosetta --agree-to-license
   nix.extraOptions = ''
     extra-platforms = x86_64-darwin aarch64-darwin
+    builders-use-substitutes = true
   '';
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs-darwin}" ];
