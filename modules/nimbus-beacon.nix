@@ -34,6 +34,7 @@
 
   services.ethereum.nimbus-beacon.holesky = {
     enable = true;
+    # TODO: switch to nimbus-eth2 flake
     package = inputs.ethereum-nix.packages.x86_64-linux.nimbus;
     args = {
       data-dir = "/data/nimbus-beacon-holesky";
