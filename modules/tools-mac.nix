@@ -79,7 +79,6 @@
       { greedy = true; name = "kaleidoscope"; }
       { greedy = true; name = "karabiner-elements"; }
       { greedy = true; name = "karafun"; }
-      { greedy = true; name = "ledger-live"; }
       { greedy = true; name = "libreoffice"; }
       { greedy = true; name = "logitech-camera-settings"; }
       { greedy = true; name = "macfuse"; }
@@ -101,10 +100,10 @@
       { greedy = true; name = "rocket-chat"; }
       { greedy = true; name = "rstudio"; }
       { greedy = true; name = "signal"; }
-      { greedy = true; name = "skype"; }
       { greedy = true; name = "slack"; }
       { greedy = true; name = "spaceman"; }
       { greedy = true; name = "spotify"; }
+      { greedy = true; name = "status"; }
       { greedy = true; name = "tailscale"; }
       { greedy = true; name = "tableau-public"; }
       { greedy = true; name = "telegram"; }
