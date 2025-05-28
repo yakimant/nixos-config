@@ -18,6 +18,7 @@
       gawk
       git
       gnumake
+      gnused
       htop
       hyperfine
       inetutils

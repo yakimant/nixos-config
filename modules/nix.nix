@@ -8,6 +8,11 @@
   nix.channel.enable = false;
 
   # nix.package = pkgs.nix;
+ 
+  nix.extraOptions =
+    ''
+      warn-dirty = false
+    '';
 
   nix.settings = {
     experimental-features = "nix-command flakes";

@@ -10,7 +10,7 @@
   environment.systemPackages = with pkgs; [
       age
       age-plugin-yubikey
-#ansible-lint
+ansible-lint
 #ansible_2_16
       awscli2
 #bitwarden-cli # doesnt compile
