@@ -64,4 +64,8 @@
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs-darwin}" ];
   nix.registry.nixpkgs.flake = inputs.nixpkgs-darwin;
   environment.etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs-darwin}";
+
+  networking.knownNetworkServices = [
+    "Wi-Fi"
+  ];
 }

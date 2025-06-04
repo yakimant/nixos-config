@@ -1,5 +1,3 @@
-{ inputs, pkgs, ... }:
-
 {
   imports = [
     ../../modules/basic.nix
