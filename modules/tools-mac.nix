@@ -8,7 +8,7 @@
       grandperspective
       pinentry_mac
       skhd
-      yabai
+      pkgs.unstable.yabai
       yubikey-manager
       xcodes
   ];
@@ -18,13 +18,13 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
+      # updates homebrew packages on activation,
+      # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
       upgrade = true;
       cleanup = "zap";
     };
-    # updates homebrew packages on activation,
-    # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
-    #
-      #brewfile = true;
+
+    global.brewfile = true;
 
     brews = [
       "ncdu"
@@ -34,6 +34,7 @@
 
     taps = [
       "kreuzwerker/taps" # for m1-terraform-provider-helper
+      "homebrew/cask"
     ];
 
     masApps = {

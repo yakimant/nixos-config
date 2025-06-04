@@ -19,8 +19,8 @@
     nixpkgs.follows = "nixpkgs-2411";
 
     # See https://github.com/NixOS/nixpkgs/issues/107466
-    #nixpkgs-darwin-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    
+    #nixpkgs-darwin-unstable.follows = "nixpkgs-unstable";
+
     nix-darwin = {
       url = "github:LnL7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
@@ -55,6 +55,7 @@
     nix-darwin,
     nixpkgs,
     nixpkgs-darwin,
+    nixpkgs-unstable,
     ... }:
     let
       stableSystems = ["x86_64-linux" "aarch64-darwin"];
@@ -62,6 +63,13 @@
       pkgsFor = nixpkgs.lib.genAttrs stableSystems (
         system: import nixpkgs { inherit system; config.allowUnfree = true; }
       );
+      overlay = final: prev: let
+        unstablePkgs = import nixpkgs-unstable { inherit (prev) system; config.allowUnfree = true; };
+      in {
+        unstable = unstablePkgs;
+      };
+      # Overlays-module makes "pkgs.unstable" available in configuration.nix
+      overlayModule = ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay ]; });
     in {
       devShells = forAllSystems (system: let
         pkgs = pkgsFor.${system};
@@ -78,6 +86,7 @@
 
       darwinConfigurations."macbook-air" = nix-darwin.lib.darwinSystem {
         modules = [
+          overlayModule
           mac-app-util.darwinModules.default
           ./hosts/macbook-air/configuration.nix
         ];
@@ -86,6 +95,7 @@
 
       darwinConfigurations."mac-mini" = nix-darwin.lib.darwinSystem {
         modules = [
+          overlayModule
           mac-app-util.darwinModules.default
           ./hosts/mac-mini/configuration.nix
         ];
@@ -96,6 +106,7 @@
         system = "x86_64-linux";
 #pkgs = nixpkgs.legacyPackages.${system};
         modules = [
+          overlayModule
           disko.nixosModules.disko
           ./hosts/holesky/configuration.nix
 
@@ -108,6 +119,7 @@
       nixosConfigurations."thinkpad" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          overlayModule
           disko.nixosModules.disko
           ./hosts/thinkpad/configuration.nix
         ];
@@ -117,6 +129,7 @@
       nixosConfigurations."qnap" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          overlayModule
           disko.nixosModules.disko
           ./hosts/qnap/configuration.nix
         ];
