@@ -82,6 +82,7 @@
       { greedy = true; name = "karafun"; }
       { greedy = true; name = "libreoffice"; }
       { greedy = true; name = "logitech-camera-settings"; }
+      { greedy = true; name = "maccy"; }
       { greedy = true; name = "macfuse"; }
       { greedy = true; name = "macwhisper"; }
 #      { greedy = true; name = "microsoft-auto-update"; }
