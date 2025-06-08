@@ -34,7 +34,7 @@
 
     taps = [
       "kreuzwerker/taps" # for m1-terraform-provider-helper
-      "homebrew/cask"
+      #"homebrew/cask"
     ];
 
     masApps = {
