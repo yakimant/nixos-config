@@ -34,6 +34,12 @@
     #wireless.enable = true;
   };
 
+  users.users.root = {
+    hashedPassword = "$6$uzGSLfdzxPtlPETF$.tMGIcunN5IhRuSX8SW3DHmNQx2Zv93moJfPCAes8zUvmRFWnmTn9etrvB7z/NcVS2RTduJm8/SBVfnXy5pg50";
+  };
+
+  boot.zfs.requestEncryptionCredentials = false;
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";
 }
