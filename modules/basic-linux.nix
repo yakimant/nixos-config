@@ -5,10 +5,16 @@
 
   services.openssh = {
     settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = lib.mkForce "no";
+      # need for zfs decrypt
+      # dropbear as alternative
+      #PermitRootLogin = lib.mkForce "no";
+      # give root same keys
+      #PasswordAuthentication = false;
     };
   };
+
+  # https://discourse.nixos.org/t/logrotate-config-fails-due-to-missing-group-30000/28501
+  services.logrotate.checkConfig = false;
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   nix.registry.nixpkgs.flake = inputs.nixpkgs;

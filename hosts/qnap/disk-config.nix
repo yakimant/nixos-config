@@ -149,7 +149,7 @@
               encryption = "aes-256-gcm";
               keyformat = "passphrase";
               keylocation = "prompt";
-              mountpoint = "legacy";
+              #mountpoint = "legacy";
             };
           };
         };
