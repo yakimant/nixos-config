@@ -3,6 +3,7 @@
     disk = {
       main = {
         device = "/dev/nvme0n1";
+        # TODO: /dev/disk/by-id/
         type = "disk";
         content = {
           type = "gpt";
@@ -21,7 +22,7 @@
               end = "-4G";
               content = {
                 type = "zfs";
-                pool = "zroot";
+                pool = "rpool";
               };
             };
             swap = {
@@ -43,7 +44,7 @@
             zfs = {
               content = {
                 type = "zfs";
-                pool = "zdata";
+                pool = "data";
               };
             };
           };
@@ -58,100 +59,73 @@
             zfs = {
               content = {
                 type = "zfs";
-                pool = "zdata";
+                pool = "data";
               };
             };
           };
         };
       };
     };
-    zpool = {
-      zroot = {
-        type = "zpool";
-        rootFsOptions = {
-          # https://wiki.archlinux.org/title/Install_Arch_Linux_on_ZFS
-          acltype = "posixacl";
-          atime = "off";
-          compression = "zstd";
-          mountpoint = "none";
-          xattr = "sa";
+    zpool = let
+      rootFsOptions = {
+        # https://openzfs.github.io/openzfs-docs/man/v2.3/7/zfsprops.7.html
+        acltype = "posixacl";
+        atime = "off";
+        compression = "zstd";
+        dnodesize = "auto";
+        mountpoint = "none";
+        normalization = "formD";
+        xattr = "sa";
         };
-        options.ashift = "12";
+
+      mkZfsDataSet = mountpoint: quota: snapshot: options: mountOptions: {
+        type = "zfs_fs";
+        inherit mountpoint;
+        # https://openzfs.github.io/openzfs-docs/man/v2.3/7/zfsprops.7.html
+        options = {
+          inherit quota;
+          reservation = quota;
+          # Used by services.zfs.autoSnapshot options.
+          "com.sun:auto-snapshot" = toString snapshot;
+          mountpoint = "legacy";
+        } // options;
+        # https://man7.org/linux/man-pages/man5/fstab.5.html
+        inherit mountOptions;
+      };
+
+      reserve = mkZfsDataSet null "10G" false { } []; #canmount = "off"; } [ ];
+    in {
+      rpool = {
+        type = "zpool";
+        inherit rootFsOptions;
+        # https://openzfs.github.io/openzfs-docs/man/v2.3/7/zpoolprops.7.html
+        # physical sector size: fdisk / lsblk to confirm
+        options.ashift = "0"; # auto, but probably 512B
 
         datasets = {
-          "local" = {
-            type = "zfs_fs";
-            options.mountpoint = "none";
-          };
-          "local/home" = {
-            type = "zfs_fs";
-            mountpoint = "/home";
-            options = {
-              # Used by services.zfs.autoSnapshot options.
-              "com.sun:auto-snapshot" = "true";
-              encryption = "aes-256-gcm";
-              keyformat = "passphrase";
-              keylocation = "prompt";
-              mountpoint = "legacy";
-            };
-          };
-          "local/nix" = {
-            type = "zfs_fs";
-            mountpoint = "/nix";
-            options = {
-              "com.sun:auto-snapshot" = "false";
-              mountpoint = "legacy";
-            };
-          };
-          "local/persist" = {
-            type = "zfs_fs";
-            mountpoint = "/persist";
-            options = {
-              "com.sun:auto-snapshot" = "true";
-              mountpoint = "legacy";
-            };
-          };
-          "local/root" = {
-            type = "zfs_fs";
-            mountpoint = "/";
-            options = {
-              "com.sun:auto-snapshot" = "false";
-              mountpoint = "legacy";
-            };
-            postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot/local/root@blank$' || zfs snapshot zroot/local/root@blank";
-          };
+          # postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot/local/root@blank$' || zfs snapshot zroot/local/root@blank";
+          root     = mkZfsDataSet "/"     "10G" true  { } [ ];
+          nix      = mkZfsDataSet "/nix"  "40G" false { } [ ];
+          home     = mkZfsDataSet "/home" "10G" true  { } [ ];
+          persist  = mkZfsDataSet "/persist"  "1G" true { } [ ];
+          inherit reserve;
         };
       };
-      zdata = {
+      data = {
         type = "zpool";
         mode = "mirror";
-        rootFsOptions = {
-          # https://wiki.archlinux.org/title/Install_Arch_Linux_on_ZFS
-          acltype = "posixacl";
-          atime = "off";
-          compression = "zstd";
-          mountpoint = "none";
-          xattr = "sa";
-        };
-        options.ashift = "12";
+        inherit rootFsOptions;
+        # https://openzfs.github.io/openzfs-docs/man/v2.3/7/zpoolprops.7.html
+        # physical sector size: fdisk / lsblk to confirm
+        options.ashift = "12"; # 4kB
 
         datasets = {
-          "local" = {
-            type = "zfs_fs";
-            options.mountpoint = "none";
-          };
-          "local/data" = {
-            type = "zfs_fs";
-            mountpoint = "/data";
-            options = {
-              # Used by services.zfs.autoSnapshot options.
-              "com.sun:auto-snapshot" = "true";
-              encryption = "aes-256-gcm";
-              keyformat = "passphrase";
-              keylocation = "prompt";
-              #mountpoint = "legacy";
-            };
-          };
+          data     = mkZfsDataSet "/data" "none" true  {
+            encryption = "aes-256-gcm";
+            keyformat = "passphrase";
+            keylocation = "prompt";
+          } [ "noauto" "nofail" ];
+          inherit reserve;
         };
       };
     };
