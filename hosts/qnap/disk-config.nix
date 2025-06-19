@@ -2,8 +2,7 @@
   disko.devices = {
     disk = {
       main = {
-        device = "/dev/nvme0n1";
-        # TODO: /dev/disk/by-id/
+        device = "/dev/disk/by-id/nvme-CT500P3PSSD8_24444C3312DE";
         type = "disk";
         content = {
           type = "gpt";
@@ -36,7 +35,7 @@
         };
       };
       data1 = {
-        device = "/dev/sda";
+        device = "/dev/disk/by-id/ata-WDC_WD20EFPX-68C4TN0_WD-WX32D347PFEK";
         type = "disk";
         content = {
           type = "gpt";
@@ -51,7 +50,7 @@
         };
       };
       data2 = {
-        device = "/dev/sdb";
+        device = "/dev/disk/by-id/ata-WDC_WD20EFPX-68C4TN0_WD-WX32D94NUY8L";
         type = "disk";
         content = {
           type = "gpt";
