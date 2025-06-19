@@ -98,7 +98,7 @@
         type = "zpool";
         inherit rootFsOptions;
         # https://openzfs.github.io/openzfs-docs/man/v2.3/7/zpoolprops.7.html
-        # physical sector size: fdisk / lsblk to confirm
+        # physical sector size: `sudo fdisk -l` to confirm
         options.ashift = "0"; # auto, but probably 512B
 
         datasets = {
@@ -115,7 +115,7 @@
         mode = "mirror";
         inherit rootFsOptions;
         # https://openzfs.github.io/openzfs-docs/man/v2.3/7/zpoolprops.7.html
-        # physical sector size: fdisk / lsblk to confirm
+        # physical sector size: `sudo fdisk -l` to confirm
         options.ashift = "12"; # 4kB
 
         datasets = {
