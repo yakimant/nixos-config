@@ -103,10 +103,10 @@
 
         datasets = {
           # postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot/local/root@blank$' || zfs snapshot zroot/local/root@blank";
-          root     = mkZfsDataSet "/"     "10G" true  { } [ ];
-          nix      = mkZfsDataSet "/nix"  "40G" false { } [ ];
-          home     = mkZfsDataSet "/home" "10G" true  { } [ ];
-          persist  = mkZfsDataSet "/persist"  "1G" true { } [ ];
+          root     = mkZfsDataSet "/"         "10G" true  { } [ "defaults" ];
+          nix      = mkZfsDataSet "/nix"      "40G" false { } [ "defaults" ];
+          home     = mkZfsDataSet "/home"     "10G" true  { } [ "defaults" ];
+          persist  = mkZfsDataSet "/persist"  "1G"  true  { } [ "defaults" ];
           inherit reserve;
         };
       };
