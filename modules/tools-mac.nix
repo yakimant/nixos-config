@@ -1,7 +1,5 @@
 { inputs, pkgs, ... }:
 
-# TODO: brew or appstore
-
 {
   environment.systemPackages = with pkgs; [
       # mac specific
@@ -37,6 +35,8 @@
       #"homebrew/cask"
     ];
 
+    # $ mas list
+    # remove manually
     masApps = {
       "Amphetamine" = 937984704;
       #"Bitwarden" = 1352778147; # causing troubles to skhd
@@ -45,7 +45,7 @@
       "Keynote" = 409183694;
       "Numbers" = 409203825;
       "Pages" = 409201541;
-      #"PeakHour" = 1560576252;
+      "PeakHour" = 1560576252;
       "Reeder" = 1529448980;
       "Remote Desktop" = 409907375;
       "WireGuard" = 1451685025;
@@ -85,7 +85,6 @@
       { greedy = true; name = "maccy"; }
       { greedy = true; name = "macfuse"; }
       { greedy = true; name = "macwhisper"; }
-#      { greedy = true; name = "microsoft-auto-update"; }
       { greedy = true; name = "microsoft-edge"; }
       { greedy = true; name = "microsoft-office"; }
       { greedy = true; name = "microsoft-teams"; }
@@ -93,7 +92,6 @@
       { greedy = true; name = "nextcloud"; }
       { greedy = true; name = "onlyoffice"; }
       { greedy = true; name = "parallels"; }
-      { greedy = true; name = "peakhour"; }
       { greedy = true; name = "podman-desktop"; }
       { greedy = true; name = "poe"; }
       { greedy = true; name = "proton-mail-bridge"; }
@@ -105,6 +103,7 @@
       { greedy = true; name = "slack"; }
       { greedy = true; name = "spaceman"; }
       { greedy = true; name = "spotify"; }
+      #{ greedy = true; name = "stats"; }
       { greedy = true; name = "status"; }
       { greedy = true; name = "tailscale"; }
       { greedy = true; name = "tableau-public"; }
@@ -115,7 +114,7 @@
       { greedy = true; name = "tunnelbear"; }
       { greedy = true; name = "ubiquiti-unifi-controller"; }
       { greedy = true; name = "utm"; }
-      { greedy = true; name = "viber"; }
+      #{ greedy = true; name = "viber"; }
       { greedy = true; name = "vlc"; }
       { greedy = true; name = "vmware-fusion"; }
       { greedy = true; name = "windows-app"; }

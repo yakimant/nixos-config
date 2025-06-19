@@ -53,6 +53,42 @@
     defaults = {
       universalaccess.reduceMotion = true;
       universalaccess.reduceTransparency = true;
+      #".GlobalPreferences"."com.apple.mouse.scaling" = 1.0
+      #CustomSystemPreferences
+      #LaunchServices.LSQuarantine = false;
+      SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+      #controlcenter
+      finder.CreateDesktop = true;
+      dock = {
+        autohide = true;
+        mru-spaces = false;
+      };
+      #dock
+      #screencapture.location
+      trackpad = {
+        #more
+        ActuationStrength = 0;
+        Clicking = true;
+        FirstClickThreshold = 0;
+      };
+      WindowManager = {
+        EnableStandardClickToShowDesktop = false; # for yabai
+      };
+      NSGlobalDomain = {
+        #NSGlobalDomain.InitialKeyRepeat
+        #NSGlobalDomain.KeyRepeat
+        AppleEnableSwipeNavigateWithScrolls = false;
+        AppleICUForce24HourTime = true;
+        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticDashSubstitutionEnabled = false;
+        NSAutomaticInlinePredictionEnabled = false;
+        NSAutomaticPeriodSubstitutionEnabled = false;
+        NSAutomaticQuoteSubstitutionEnabled = false;
+        NSAutomaticSpellingCorrectionEnabled = false;
+        #NSAutomaticWindowAnimationsEnabled
+        "com.apple.trackpad.forceClick" = false;
+        "com.apple.trackpad.scaling" = 3.0;
+      };
     };
   };
 
