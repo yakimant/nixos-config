@@ -110,6 +110,7 @@
           inherit reserve;
         };
       };
+      # TODO: rename to dpool
       data = {
         type = "zpool";
         mode = "mirror";
