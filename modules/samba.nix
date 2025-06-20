@@ -3,8 +3,8 @@
 {
   services.samba = {
     enable = true;
-    #securityType = "user";
     openFirewall = true;
+
     # https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html
     settings = {
       global = {
@@ -17,6 +17,7 @@
         #"name resolve order" = "bcast host";
         #"bind interfaces only" = true;
 
+        # NOTE: add users by `sudo smbpass -a USER`
         # auth
         "security" = "user";
         "guest account" = "nobody";
@@ -55,8 +56,7 @@
     };
   };
 
-  #services.samba-wsdd = {
-  #  enable = true;
-  #  openFirewall = true;
-  #};
+  users.users.yana = {
+    isNormalUser = true;
+  };
 }

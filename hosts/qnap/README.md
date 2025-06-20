@@ -11,6 +11,7 @@
 - [ ] disable root password, ssh
 - [ ] consider RAM upgade (to 8 or 16)
 - [ ] consider SWAP for installer
+- [ ] try ZFS/SMB integration, see usershare, sharesmb
 
 ## Setup
 
