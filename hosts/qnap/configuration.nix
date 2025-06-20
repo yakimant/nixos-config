@@ -1,15 +1,8 @@
 {
-  ...
-}:
-
-{
   imports = [
-    ../../modules/basic.nix
-    ../../modules/basic-linux.nix
-    ../../modules/nix.nix
-    ../../modules/tools-basic.nix
-    ../../modules/tools-linux.nix
-    ../../modules/users.nix
+    ../../modules/base
+    ../../modules/linux
+    ../../modules/samba.nix
     ./disk-config.nix
     ./hardware-configuration.nix
   ];

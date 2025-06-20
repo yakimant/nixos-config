@@ -1,15 +1,17 @@
 { inputs, lib, pkgs, ... }:
 
 {
+  imports = [
+    ./zfs.nix
+  ];
+
   users.defaultUserShell = pkgs.zsh;
 
   services.openssh = {
     settings = {
-      # need for zfs decrypt
-      # dropbear as alternative
-      #PermitRootLogin = lib.mkForce "no";
-      # give root same keys
-      #PasswordAuthentication = false;
+      # TODO: initrd ssh for boot issues
+      PermitRootLogin = lib.mkForce "no";
+      PasswordAuthentication = false;
     };
   };
 
