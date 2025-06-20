@@ -2,8 +2,8 @@
 
 ## TODO
 
-- [ ] zfs auto-snapshots
-- [ ] zfs auto-scrap
+- [ ] zfs auto-snapshots test (zfs list -t snapshot)
+- [ ] zfs auto-scrap (test, see logs)
 
 - [ ] zfs auto-trim
 - [ ] zfs home encryption
