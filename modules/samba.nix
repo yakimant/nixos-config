@@ -10,24 +10,18 @@
       global = {
         "netbios name" = config.networking.hostName;
 
-        #"server string" = "smbnix";
-        #"workgroup" = "WORKGROUP";
-        #"use sendfile" = "yes"; speedup
-        #"max protocol" = "smb2";
-        #"name resolve order" = "bcast host";
-        #"bind interfaces only" = true;
-
-        # NOTE: add users by `sudo smbpass -a USER`
         # auth
+        # NOTE: add users by `sudo smbpass -a USER`
         "security" = "user";
         "guest account" = "nobody";
         "map to guest" = "bad user";
 
-        # note: localhost is the ipv6 localhost ::1
+        # filter hosts
         "hosts allow" = "192.168.1. 127.0.0.1 localhost";
         "hosts deny" = "0.0.0.0/0"; # ALL
+        #"bind interfaces only" = true; # filter interfaces too
 
-        # printers
+        # printers (disable)
         "load printers" = false;
         "printcap name" = "/dev/null";
         "printing" = "bsd";
@@ -38,20 +32,14 @@
         "writeable" = "yes"; # make no?
         "guest ok" = "yes";
         "guest only" = "yes";
-        "create mask" = "0644"; # cut x
-        # "directory mask" = "0755"; default
-        #"force user" = "username";
-        #"force group" = "groupname";
+        "create mask" = "0644"; # cut exec
       };
       "private" = {
         "path" = "/data/private";
         "browseable" = "yes"; # make no?
         "writeable" = "yes"; # default
         #"guest ok" = "no"; default
-        "create mask" = "0644"; # cut x
-        # "directory mask" = "0755"; default
-        #"force user" = "username";
-        #"force group" = "groupname";
+        "create mask" = "0644"; # cut exec
       };
     };
   };
