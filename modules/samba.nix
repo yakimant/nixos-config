@@ -39,8 +39,8 @@
         "guest only" = "yes";
         "create mask" = "0644"; # cut x
         # "directory mask" = "0755"; default
-        "force user" = "username";
-        "force group" = "groupname";
+        #"force user" = "username";
+        #"force group" = "groupname";
       };
       "private" = {
         "path" = "/data/private";
@@ -49,8 +49,8 @@
         #"guest ok" = "no"; default
         "create mask" = "0644"; # cut x
         # "directory mask" = "0755"; default
-        "force user" = "username";
-        "force group" = "groupname";
+        #"force user" = "username";
+        #"force group" = "groupname";
       };
     };
   };
