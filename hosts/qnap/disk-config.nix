@@ -85,7 +85,7 @@
           inherit quota;
           reservation = quota;
           # Used by services.zfs.autoSnapshot options.
-          "com.sun:auto-snapshot" = toString snapshot;
+          "com.sun:auto-snapshot" = if snapshot then "true" else "false";
           mountpoint = "legacy";
         } // options;
         # https://man7.org/linux/man-pages/man5/fstab.5.html
