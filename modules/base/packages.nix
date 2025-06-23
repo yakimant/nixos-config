@@ -14,6 +14,7 @@ in {
     btop
     coreutils
     curl
+    direnv
     fastfetch
     fswatch
     fzf
@@ -26,6 +27,7 @@ in {
     inetutils
     iperf
     jq
+    just
     mosh
     mtr
 #ncdu # move from linux-tools when mac issues fixed

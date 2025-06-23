@@ -18,7 +18,6 @@ ansible-lint
       cf-terraforming
       colima
 #consul
-      direnv
       docker
 #element-desktop # SSO doesn't work on macOS
       fd
@@ -28,7 +27,6 @@ ansible-lint
       gnupg
       go
       hugo
-      just
       matrix-commander
       makefile2graph
       markdownlint-cli
