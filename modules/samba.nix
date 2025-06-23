@@ -26,18 +26,18 @@
         "printcap name" = "/dev/null";
         "printing" = "bsd";
       };
-      "public" = {
-        "path" = "/data/public";
-        "browseable" = "yes"; # default
-        "writeable" = "yes"; # make no?
-        "guest ok" = "yes";
-        "guest only" = "yes";
-        "create mask" = "0644"; # cut exec
-      };
-      "private" = {
-        "path" = "/data/private";
-        "browseable" = "yes"; # make no?
-        "writeable" = "yes"; # default
+      #"public" = {
+      #  "path" = "/data/public";
+      #  "browseable" = "yes"; # default
+      #  "writeable" = "yes"; # make no?
+      #  "guest ok" = "yes";
+      #  "guest only" = "yes";
+      #  "create mask" = "0644"; # cut exec
+      #};
+      "files" = {
+        "path" = "/data/files";
+        "browseable" = "no";
+        "writeable" = "yes";
         #"guest ok" = "no"; default
         "create mask" = "0644"; # cut exec
       };
