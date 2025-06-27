@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./users.nix
     ./zfs.nix
   ];
 

@@ -1,6 +1,10 @@
 { inputs, pkgs, ... }:
 
 {
+  imports = [
+    ./packages.nix
+  ];
+
   programs.zsh.enableGlobalCompInit = false;
 
   # Auto upgrade nix package and the daemon service.
@@ -51,8 +55,21 @@
     stateVersion = 4;
 
     defaults = {
-      universalaccess.reduceMotion = true;
-      universalaccess.reduceTransparency = true;
+      controlcenter = {
+        AirDrop = false;
+        BatteryShowPercentage = false;
+        Bluetooth = false;
+        Display = false;
+        FocusModes = false;
+        NowPlaying = false;
+        Sound = false;
+      };
+
+      universalaccess = {
+        reduceMotion = true;
+        reduceTransparency = true;
+      };
+
       #".GlobalPreferences"."com.apple.mouse.scaling" = 1.0
       #CustomSystemPreferences
       #LaunchServices.LSQuarantine = false;
