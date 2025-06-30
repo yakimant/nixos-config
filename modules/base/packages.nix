@@ -35,6 +35,7 @@ in {
     nmap
     openssh
 #openssl
+    pssh
     python311
 #pythonPackages
     ripgrep
