@@ -57,6 +57,7 @@
       { greedy = true; name = "adium"; }
       { greedy = true; name = "alacritty"; }
       { greedy = true; name = "android-commandlinetools"; }
+      { greedy = true; name = "avg-antivirus"; }
       { greedy = true; name = "balenaetcher"; }
       { greedy = true; name = "bluestacks"; }
       { greedy = true; name = "brave-browser"; }
