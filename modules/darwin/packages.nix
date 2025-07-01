@@ -11,7 +11,6 @@
       xcodes
   ];
 
-
   homebrew = {
     enable = true;
     onActivation = {
@@ -52,78 +51,82 @@
     };
 
     caskArgs.no_quarantine = true;
-    casks = [
-      { greedy = true; name = "1password"; }
-      { greedy = true; name = "adium"; }
-      { greedy = true; name = "alacritty"; }
-      { greedy = true; name = "android-commandlinetools"; }
-      { greedy = true; name = "avg-antivirus"; }
-      { greedy = true; name = "balenaetcher"; }
-      { greedy = true; name = "bluestacks"; }
-      { greedy = true; name = "brave-browser"; }
-      { greedy = true; name = "bruno"; }
-      { greedy = true; name = "chatgpt"; }
-      { greedy = true; name = "chromium"; }
-      { greedy = true; name = "cold-turkey-blocker"; }
-      { greedy = true; name = "cyberduck"; }
-      { greedy = true; name = "db-browser-for-sqlite"; }
-      { greedy = true; name = "dbeaver-community"; }
-      { greedy = true; name = "discord"; }
-      { greedy = true; name = "dropbox"; }
-      { greedy = true; name = "element"; }
-      { greedy = true; name = "firefox"; }
-      { greedy = true; name = "github"; }
-      { greedy = true; name = "google-chrome"; }
-      { greedy = true; name = "google-cloud-sdk"; }
-      { greedy = true; name = "google-drive"; }
-      { greedy = true; name = "gotomeeting"; }
-      { greedy = true; name = "jordanbaird-ice"; }
-      { greedy = true; name = "kaleidoscope"; }
-      { greedy = true; name = "karabiner-elements"; }
-      { greedy = true; name = "karafun"; }
-      { greedy = true; name = "libreoffice"; }
-      { greedy = true; name = "logitech-camera-settings"; }
-      { greedy = true; name = "maccy"; }
-      { greedy = true; name = "macfuse"; }
-      { greedy = true; name = "macwhisper"; }
-      { greedy = true; name = "microsoft-edge"; }
-      { greedy = true; name = "microsoft-office"; }
-      { greedy = true; name = "microsoft-teams"; }
-      { greedy = true; name = "netspot"; }
-      { greedy = true; name = "nextcloud"; }
-      { greedy = true; name = "onlyoffice"; }
-      { greedy = true; name = "parallels"; }
-      { greedy = true; name = "podman-desktop"; }
-      { greedy = true; name = "poe"; }
-      { greedy = true; name = "proton-mail-bridge"; }
-      { greedy = true; name = "protonvpn"; }
-      { greedy = true; name = "rar"; }
-      { greedy = true; name = "rocket-chat"; }
-      { greedy = true; name = "rstudio"; }
-      { greedy = true; name = "signal"; }
-      { greedy = true; name = "slack"; }
-      { greedy = true; name = "spaceman"; }
-      { greedy = true; name = "spotify"; }
-      #{ greedy = true; name = "stats"; }
-      { greedy = true; name = "status"; }
-      { greedy = true; name = "tailscale"; }
-      { greedy = true; name = "tableau-public"; }
-      { greedy = true; name = "telegram"; }
-      { greedy = true; name = "the-clock"; }
-      { greedy = true; name = "tor-browser"; }
-      { greedy = true; name = "transmission"; }
-      { greedy = true; name = "tunnelbear"; }
-      { greedy = true; name = "ubiquiti-unifi-controller"; }
-      { greedy = true; name = "utm"; }
-      #{ greedy = true; name = "viber"; }
-      { greedy = true; name = "vlc"; }
-      { greedy = true; name = "vmware-fusion"; }
-      { greedy = true; name = "windows-app"; }
-      { greedy = true; name = "xquartz"; }
-      { greedy = true; name = "yandex"; }
-      { greedy = true; name = "yandex-cloud-cli"; }
-      { greedy = true; name = "yandex-disk"; }
-      { greedy = true; name = "zoom"; }
+    #greedyCasks = true;
+    casks = let
+      greedyCasks = names: map (name: { greedy = true; inherit name; }) names;
+    in greedyCasks [
+      "1password"
+      "adium"
+      "aegisub"
+      "alacritty"
+      "android-commandlinetools"
+      "avg-antivirus"
+      "balenaetcher"
+      "bluestacks"
+      "brave-browser"
+      "bruno"
+      "chatgpt"
+      "chromium"
+      "cold-turkey-blocker"
+      "cyberduck"
+      "db-browser-for-sqlite"
+      "dbeaver-community"
+      "discord"
+      "dropbox"
+      "element"
+      "firefox"
+      "github"
+      "google-chrome"
+      "google-cloud-sdk"
+      "google-drive"
+      "gotomeeting"
+      "handbrake"
+      "jordanbaird-ice"
+      "kaleidoscope"
+      "karabiner-elements"
+      "karafun"
+      "libreoffice"
+      "logitech-camera-settings"
+      "maccy"
+      "macfuse"
+      "macwhisper"
+      "microsoft-edge"
+      "microsoft-office"
+      "microsoft-teams"
+      "netspot"
+      "nextcloud"
+      "onlyoffice"
+      "parallels"
+      "podman-desktop"
+      "poe"
+      "proton-mail-bridge"
+      "protonvpn"
+      "rar"
+      "rocket-chat"
+      "rstudio"
+      "signal"
+      "slack"
+      "spotify"
+      # "stats"
+      "status"
+      "tailscale"
+      "tableau-public"
+      "telegram"
+      "the-clock"
+      "tor-browser"
+      "transmission"
+      "tunnelbear"
+      "ubiquiti-unifi-controller"
+      "utm"
+      # "viber"
+      "vlc"
+      "vmware-fusion"
+      "windows-app"
+      "xquartz"
+      "yandex"
+      "yandex-cloud-cli"
+      "yandex-disk"
+      "zoom"
     ];
   };
 }
