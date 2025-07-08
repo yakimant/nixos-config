@@ -54,6 +54,11 @@
     # $ darwin-rebuild changelog
     stateVersion = 4;
 
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToControl = true;
+    };
+
     defaults = {
       controlcenter = {
         AirDrop = false;

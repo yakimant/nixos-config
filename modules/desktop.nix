@@ -2,7 +2,11 @@
 
 # python, r, ruby ?
 
+let
+  firacode = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
+in
 {
+  fonts.packages = [ firacode ];
   # INFO: needed for matrix-commander
   nixpkgs.config.permittedInsecurePackages = [
     "olm-3.2.16"
@@ -21,6 +25,7 @@ ansible-lint
       docker
 #element-desktop # SSO doesn't work on macOS
       fd
+      ffmpeg
       fq
       fswatch
       gimp
@@ -31,7 +36,7 @@ ansible-lint
       makefile2graph
       markdownlint-cli
       mdbook
-      (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
+      firacode
       nixos-anywhere
       nixos-rebuild
       nodejs_23
