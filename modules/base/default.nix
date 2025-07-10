@@ -8,9 +8,12 @@
 
   services.openssh.enable = true;
 
-  networking.search = [
-    "yakimant.io"
-    "status.im"
-    "develp.co"
-  ];
+  networking = {
+    #domain = ""
+    search = [
+      "yakimant.io"
+      "status.im"
+      "develp.co"
+    ];
+  };
 }

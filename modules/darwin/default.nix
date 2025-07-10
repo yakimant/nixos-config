@@ -128,7 +128,17 @@
   nix.registry.nixpkgs.flake = inputs.nixpkgs-darwin;
   environment.etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs-darwin}";
 
-  networking.knownNetworkServices = [
-    "Wi-Fi"
-  ];
+  networking = {
+    dns = [
+      # Cloudflare: Malware and Adult Content Blocking
+      "1.1.1.3"
+      "1.0.0.3"
+    ];
+    #applicationFirewall.enable = true;
+    # networksetup -listallnetworkservices
+    knownNetworkServices = [
+      "USB 10/100/1000 LAN"
+      "Wi-Fi"
+    ];
+  };
 }
