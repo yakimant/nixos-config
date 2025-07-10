@@ -3,7 +3,10 @@
 {
   imports = [
     ./packages.nix
+    inputs.yknotify-rs.darwinModules.default
   ];
+
+  services.yknotify-rs.enable = true;
 
   programs.zsh.enableGlobalCompInit = false;
 

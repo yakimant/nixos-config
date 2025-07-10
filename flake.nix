@@ -31,6 +31,12 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    yknotify-rs = {
+      url = "github:reo101/yknotify-rs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      #inputs.flake-parts.follows = "flake-parts";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
