@@ -16,6 +16,7 @@ in {
     curl
     direnv
     fastfetch
+    unstable.foundry
     fswatch
     fzf
     gawk

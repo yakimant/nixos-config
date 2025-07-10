@@ -15,6 +15,8 @@ softwareupdate --install-rosetta --agree-to-license
 cp $(nix eval --raw nixpkgs#skhd)/Library/LaunchDaemons/org.nixos.skhd.plist ~/Library/LaunchAgents # and fix the PATH
 ```
 
+Install DoH profile manually: https://github.com/paulmillr/encrypted-dns
+
 ### Installation
 
 ```sh

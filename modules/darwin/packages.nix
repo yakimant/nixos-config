@@ -6,7 +6,7 @@
       grandperspective
       pinentry_mac
       skhd
-      pkgs.unstable.yabai
+      unstable.yabai
       yubikey-manager
       xcodes
   ];
