@@ -3,6 +3,7 @@
 {
   imports = [
     ./packages.nix
+    ./dnscrypt-proxy.nix
     inputs.yknotify-rs.darwinModules.default
   ];
 
