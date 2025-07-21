@@ -52,6 +52,7 @@
     };
 
     caskArgs.no_quarantine = true;
+    # TODO: upgrade to 25.11
     #greedyCasks = true;
     casks = let
       greedyCasks = names: map (name: { greedy = true; inherit name; }) names;
@@ -77,9 +78,9 @@
         "dropbox"
         "element"
         "firefox"
+        "gcloud-cli"
         "github"
         "google-chrome"
-        "google-cloud-sdk"
         "google-drive"
         "gotomeeting"
         "handbrake-app"

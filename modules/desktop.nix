@@ -3,14 +3,16 @@
 # python, r, ruby ?
 
 let
-  firacode = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
+  firacode = pkgs.nerd-fonts.fira-code;
 in
 {
   fonts.packages = [ firacode ];
+
   # INFO: needed for matrix-commander
   nixpkgs.config.permittedInsecurePackages = [
     "olm-3.2.16"
   ];
+
   environment.systemPackages = with pkgs; [
       age
       age-plugin-yubikey
@@ -39,7 +41,7 @@ ansible-lint
       firacode
       nixos-anywhere
       nixos-rebuild
-      nodejs_23
+      nodejs_24
       pass
       passage
       pidgin

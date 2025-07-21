@@ -10,9 +10,6 @@
 
   programs.zsh.enableGlobalCompInit = false;
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
   # Linux builder to support x86_64-linux
   nix.linux-builder = {
     enable = false;

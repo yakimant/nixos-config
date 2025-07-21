@@ -17,7 +17,7 @@ disko-install host:
   sudo nixos-install --no-channel-copy --no-root-password --flake .#{{ host }}
 
 darwin:
-  darwin-rebuild switch --flake .
+  sudo darwin-rebuild switch --flake .
 
 # INFO: for remote builders:
 # configure https://nix.dev/manual/nix/2.26/command-ref/conf-file#conf-builders
