@@ -128,10 +128,12 @@
 
   networking = {
     dns = [
-      # Cloudflare: Malware and Adult Content Blocking
-      "1.1.1.3"
-      "1.0.0.3"
+      "127.0.0.1"
+      # cloudflare-family
+      #"1.1.1.3"
+      #"1.0.0.3"
     ];
+    # TODO: nixos 25.11
     #applicationFirewall.enable = true;
     # networksetup -listallnetworkservices
     knownNetworkServices = [

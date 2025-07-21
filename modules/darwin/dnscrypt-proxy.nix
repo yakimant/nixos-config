@@ -22,6 +22,7 @@
       #cloaking_rules
       #random
       #cache
+      # firefox local doh
 
       sources.parental-control = {
         urls = [
