@@ -4,6 +4,7 @@
   imports = [
     ./users.nix
     ./zfs.nix
+    ./tailscale.nix
   ];
  
   environment.systemPackages = [ inputs.agenix.packages.x86_64-linux.default ];
