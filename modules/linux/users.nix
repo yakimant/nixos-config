@@ -1,3 +1,5 @@
+{ config, ... }:
+
 {
   age.secrets = {
     "users/yakimant/pass-hash" = {
