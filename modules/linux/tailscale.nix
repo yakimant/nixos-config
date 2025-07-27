@@ -16,6 +16,6 @@ in {
     extraSetFlags = [ "--ssh=false" ];
     # WARNING: These keys expire after 90 days.
     # https://login.tailscale.com/admin/settings/keys
-    authKeyFile = config.age.secrets."service/tailscale/${hostname}".path
+    authKeyFile = config.age.secrets."service/tailscale/${hostname}".path;
   };
 }
