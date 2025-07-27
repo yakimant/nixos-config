@@ -127,6 +127,7 @@
   environment.etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs-darwin}";
 
   networking = {
+    wakeOnLan.enable = true;
     dns = [
       "127.0.0.1"
       # cloudflare-family
