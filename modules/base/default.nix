@@ -14,6 +14,9 @@
       "yakimant.io"
       "status.im"
       "develp.co"
+      "tail39c650.ts.net"
+      "local"
+      "home"
     ];
   };
 }
