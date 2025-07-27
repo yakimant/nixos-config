@@ -17,7 +17,7 @@
         "map to guest" = "bad user";
 
         # filter hosts
-        "hosts allow" = "192.168.1. 127.0.0.1 localhost";
+        "hosts allow" = "100.64.0.0/255.192.0.0 192.168.1. 127.0.0.1 localhost";
         "hosts deny" = "0.0.0.0/0"; # ALL
         #"bind interfaces only" = true; # filter interfaces too
 
