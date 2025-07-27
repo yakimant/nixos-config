@@ -25,6 +25,9 @@
         "load printers" = false;
         "printcap name" = "/dev/null";
         "printing" = "bsd";
+
+        # parse_dfs_path_strict: can't parse hostname from path
+        "host msdfs" = "no";
       };
       #"public" = {
       #  "path" = "/data/public";
