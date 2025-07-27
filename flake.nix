@@ -15,6 +15,12 @@
     # See https://github.com/NixOS/nixpkgs/issues/107466
     #nixpkgs-darwin-unstable.follows = "nixpkgs-unstable";
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = "nix-darwin";
+    };
+
     nix-darwin = {
       url = "github:LnL7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
@@ -49,6 +55,7 @@
   };
 
   outputs = inputs@{ self,
+    agenix,
     disko,
     ethereum-nix,
     mac-app-util,
@@ -87,6 +94,7 @@
       darwinConfigurations."macbook-air" = nix-darwin.lib.darwinSystem {
         modules = [
           overlayModule
+          agenix.darwinModules.default
           mac-app-util.darwinModules.default
           ./hosts/macbook-air/configuration.nix
         ];
@@ -96,6 +104,7 @@
       darwinConfigurations."mac-mini" = nix-darwin.lib.darwinSystem {
         modules = [
           overlayModule
+          agenix.darwinModules.default
           mac-app-util.darwinModules.default
           ./hosts/mac-mini/configuration.nix
         ];
@@ -108,6 +117,7 @@
         modules = [
           overlayModule
           disko.nixosModules.disko
+          agenix.nixosModules.default
           ./hosts/holesky/configuration.nix
 
           # optional: add nixos modules via the default nixosModule
@@ -121,6 +131,7 @@
         modules = [
           overlayModule
           disko.nixosModules.disko
+          agenix.nixosModules.default
           ./hosts/thinkpad/configuration.nix
         ];
         specialArgs = { inherit inputs; };
@@ -131,6 +142,7 @@
         modules = [
           overlayModule
           disko.nixosModules.disko
+          agenix.nixosModules.default
           ./hosts/qnap/configuration.nix
         ];
         specialArgs = { inherit inputs; };

@@ -2,7 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-      # mac specific
+      inputs.agenix.packages.aarch64-darwin.default
       grandperspective
       pinentry_mac
       skhd

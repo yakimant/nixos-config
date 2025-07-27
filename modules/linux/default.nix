@@ -5,6 +5,8 @@
     ./users.nix
     ./zfs.nix
   ];
+ 
+  environment.systemPackages = [ inputs.agenix.packages.x86_64-linux.default ];
 
   users.defaultUserShell = pkgs.zsh;
 
