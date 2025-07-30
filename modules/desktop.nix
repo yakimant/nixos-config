@@ -22,9 +22,11 @@ ansible-lint
 #bitwarden-cli # doesnt compile
       cachix
       cf-terraforming
+      cloudflare-cli
       colima
 #consul
       docker
+      doctl
 #element-desktop # SSO doesn't work on macOS
       fd
       ffmpeg
@@ -33,6 +35,9 @@ ansible-lint
       gimp
       gnupg
       go
+      google-clasp
+      google-cloud-sdk
+      hcloud
       hugo
       matrix-commander
       makefile2graph
@@ -42,6 +47,7 @@ ansible-lint
       nixos-anywhere
       nixos-rebuild
       nodejs_24
+      opentofu
       pass
       passage
       pidgin
@@ -59,6 +65,7 @@ ansible-lint
 #terraform
 #vault
       xq
+      yandex-cloud
       yq
       yt-dlp
       zbar

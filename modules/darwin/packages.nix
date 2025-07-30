@@ -37,18 +37,18 @@
     # $ mas list
     # remove manually
     masApps = {
-      "Amphetamine" = 937984704;
-      #"Bitwarden" = 1352778147; # causing troubles to skhd
-      "Endel" = 1346247457;
-      #"Gapplin" = 768053424; #name changed?
-      "Keynote" = 409183694;
-      "Numbers" = 409203825;
-      "Pages" = 409201541;
-      #"PeakHour 4" = 1241445112;
-      "PeakHour" = 1560576252;
-      "Reeder" = 1529448980;
+      "Amphetamine"    = 937984704;
+      #"Bitwarden"      = 1352778147; # causing troubles to skhd
+      "Endel"          = 1346247457;
+      #"Gapplin"        = 768053424; #name changed?
+      "Keynote"        = 409183694;
+      "Numbers"        = 409203825;
+      "Pages"          = 409201541;
+      #"PeakHour 4"     = 1241445112;
+      "PeakHour"       = 1560576252;
+      "Reeder"         = 1529448980;
       "Remote Desktop" = 409907375;
-      "WireGuard" = 1451685025;
+      "WireGuard"      = 1451685025;
     };
 
     caskArgs.no_quarantine = true;
@@ -78,7 +78,6 @@
         "dropbox"
         "element"
         "firefox"
-        "gcloud-cli"
         "github"
         "google-chrome"
         "google-drive"
@@ -101,17 +100,14 @@
         "onlyoffice"
         "parallels"
         "peakhour"
-        "podman-desktop"
-        "poe"
         "proton-mail-bridge"
         "protonvpn"
+        "qgis"
         "rar"
         "rocket-chat"
-        "rstudio"
         "signal"
         "slack"
         "spotify"
-        # "stats"
         "status"
         "tailscale-app"
         "tableau-public"
@@ -122,13 +118,13 @@
         "tunnelbear"
         "ubiquiti-unifi-controller"
         "utm"
+        # https://github.com/orgs/Homebrew/discussions/6181
         # "viber"
         "vlc"
         "vmware-fusion"
         "windows-app"
         "xquartz"
         "yandex"
-        "yandex-cloud-cli"
         "yandex-disk"
         "zoom"
       ];
