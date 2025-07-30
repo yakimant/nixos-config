@@ -1,0 +1,13 @@
+# shellcheck shell=bash
+# vim: ft=bash
+
+# This only works if user in trusted-users,
+# set system-wide remote builder otherwise
+if [[ "$(uname)" == "Darwin" ]]; then
+  NIX_CONFIG="${NIX_CONFIG}
+builders = ssh-ng://${NIX_REMOTE_BUILDER_USER:-yakimant}@${NIX_REMOTE_BUILDER_ADDR:-qnap.tail39c650.ts.net} x86_64-linux - ${NIX_REMOTE_BUILDER_CORES:-2} 1 - - -
+builders-use-substitutes = true"
+fi
+
+export NIX_CONFIG
+

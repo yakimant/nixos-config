@@ -1,3 +1,20 @@
+hosts-domain := "tail39c650.ts.net"
+remote-builder-ssh-addr := env('NIX_REMOTE_BUILDER_ADDR', "qnap."+hosts-domain)
+remote-builder-ssh-user := env('NIX_REMOTE_BUILDER_USER', 'yakimant')
+
+[private]
+_check_remote_builder_ssh:
+  #!/usr/bin/env bash
+  if [ "{{os()}}" != "linux" ] || [ "{{arch()}}" != "x86_64" ]; then
+    sudo ssh {{remote-builder-ssh-user}}@{{remote-builder-ssh-addr}} exit
+    if [ $? -ne 0 ]; then
+      echo "{{RED}}Can't build, remote builder is not accessible:"
+      echo "$ ssh {{remote-builder-ssh-user}}@{{remote-builder-ssh-addr}} exit"
+      echo "Set LIDO_REMOTE_USER and LIDO_REMOTE_ADDR to ammend"
+      exit 1
+    fi
+  fi
+
 default:
   @just --list
 
@@ -19,9 +36,7 @@ disko-install host:
 darwin:
   sudo darwin-rebuild switch --flake .
 
-# INFO: for remote builders:
-# configure https://nix.dev/manual/nix/2.26/command-ref/conf-file#conf-builders
-nixos-remote host:
+nixos-remote host: _check_remote_builder_ssh
   nixos-rebuild switch --flake .#{{ host }} \
   --use-remote-sudo --target-host {{ host }} \
   --fast \
@@ -30,7 +45,7 @@ nixos-remote host:
   #--build-host {{ host }} \
   #--max-jobs 0 \
 
-nixos-remote-dry host:
+nixos-remote-dry host: _check_remote_builder_ssh
   nixos-rebuild dry-activate --flake .#{{ host }} \
   --use-remote-sudo --target-host {{ host }} \
   --fast \

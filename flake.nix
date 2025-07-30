@@ -82,6 +82,10 @@
         pkgs = pkgsFor.${system};
       in {
         default = pkgs.mkShellNoCC {
+          shellHook =
+            ''
+              source .envrc.nix-config
+            '';
           packages = with pkgs.buildPackages; [
             just
             nix-output-monitor
