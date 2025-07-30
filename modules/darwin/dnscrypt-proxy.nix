@@ -3,6 +3,7 @@
 {
   # https://github.com/nix-darwin/nix-darwin/issues/1408
   launchd.daemons.dnscrypt-proxy.serviceConfig.UserName = lib.mkForce "root";
+  users.users._dnscrypt-proxy.home = lib.mkForce "/private/var/lib/dnscrypt-proxy";
 
   services.dnscrypt-proxy = {
     enable = true;
