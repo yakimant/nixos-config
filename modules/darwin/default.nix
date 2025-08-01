@@ -5,6 +5,7 @@
     ./packages.nix
     ./dnscrypt-proxy.nix
     inputs.yknotify-rs.darwinModules.default
+    ./ssh-agent.nix
   ];
 
   services.yknotify-rs.enable = true;
