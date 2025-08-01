@@ -28,6 +28,10 @@
 
         # parse_dfs_path_strict: can't parse hostname from path
         "host msdfs" = "no";
+
+        # veto
+        #"delete veto files" = "yes";
+        "veto files" = "/.DS_Store/._*/";
       };
       #"public" = {
       #  "path" = "/data/public";
@@ -39,7 +43,7 @@
       #};
       "files" = {
         "path" = "/data/files";
-        "browseable" = "no";
+        "browseable" = "yes";
         "writeable" = "yes";
         #"guest ok" = "no"; default
         "create mask" = "0644"; # cut exec
