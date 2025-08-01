@@ -1,6 +1,24 @@
 { lib,... }:
 
 {
+  networking = {
+    wakeOnLan.enable = true;
+    dns = [
+      "127.0.0.1"
+      # cloudflare-family
+      #"1.1.1.3"
+      #"1.0.0.3"
+    ];
+    # TODO: nixos 25.11
+    #applicationFirewall.enable = true;
+    # networksetup -listallnetworkservices
+    knownNetworkServices = [
+      "USB 10/100/1000 LAN"
+      "Wi-Fi"
+      "Ethernet"
+    ];
+  };
+
   # https://github.com/nix-darwin/nix-darwin/issues/1408
   launchd.daemons.dnscrypt-proxy.serviceConfig.UserName = lib.mkForce "root";
   users.users._dnscrypt-proxy.home = lib.mkForce "/private/var/lib/dnscrypt-proxy";

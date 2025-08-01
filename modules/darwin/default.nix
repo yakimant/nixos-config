@@ -3,10 +3,10 @@
 {
   imports = [
     ./packages.nix
-    ./dnscrypt-proxy.nix
+    ./dns.nix
     inputs.yknotify-rs.darwinModules.default
     ./apfs.nix
-    ./ssh-agent.nix
+    ./ssh.nix
   ];
 
   services.yknotify-rs.enable = true;
@@ -127,22 +127,4 @@
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs-darwin}" ];
   nix.registry.nixpkgs.flake = inputs.nixpkgs-darwin;
   environment.etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs-darwin}";
-
-  networking = {
-    wakeOnLan.enable = true;
-    dns = [
-      "127.0.0.1"
-      # cloudflare-family
-      #"1.1.1.3"
-      #"1.0.0.3"
-    ];
-    # TODO: nixos 25.11
-    #applicationFirewall.enable = true;
-    # networksetup -listallnetworkservices
-    knownNetworkServices = [
-      "USB 10/100/1000 LAN"
-      "Wi-Fi"
-      "Ethernet"
-    ];
-  };
 }
