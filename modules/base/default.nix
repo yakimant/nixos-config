@@ -11,12 +11,15 @@
   networking = {
     #domain = ""
     search = [
+      # TODO: Local:
+      #"local.arpa"
+      #"home.yakimant.io"
+      # Public
       "yakimant.io"
       "status.im"
       "develp.co"
+      # VPN
       "tail39c650.ts.net"
-      "local"
-      "home"
     ];
   };
 }
