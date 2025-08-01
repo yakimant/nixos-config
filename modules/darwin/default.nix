@@ -5,6 +5,7 @@
     ./packages.nix
     ./dnscrypt-proxy.nix
     inputs.yknotify-rs.darwinModules.default
+    ./apfs.nix
     ./ssh-agent.nix
   ];
 
