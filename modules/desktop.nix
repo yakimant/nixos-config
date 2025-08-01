@@ -51,6 +51,7 @@ ansible-lint
       pass
       passage
       pidgin
+      pinentry-tty
       pkg-config
       postgresql_16
       qemu_kvm

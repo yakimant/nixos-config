@@ -4,7 +4,6 @@
   environment.systemPackages = with pkgs; [
       inputs.agenix.packages.aarch64-darwin.default
       grandperspective
-      pinentry_mac
       skhd
       unstable.yabai
       yubikey-manager
@@ -63,7 +62,6 @@
         "aegisub"
         "alacritty"
         "android-commandlinetools"
-        "avg-antivirus"
         "balenaetcher"
         "bluestacks"
         "brave-browser"
