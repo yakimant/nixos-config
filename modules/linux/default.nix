@@ -7,7 +7,13 @@
     ./tailscale.nix
   ];
  
-  environment.systemPackages = [ inputs.agenix.packages.x86_64-linux.default ];
+  environment.systemPackages = [
+    inputs.agenix.packages.x86_64-linux.default
+    # Read-only
+    pkgs.apfs-fuse
+    # experimantal, enctyption not supported
+    # linuxKernel.packages.linux_6_16.apfs
+  ];
 
   users.defaultUserShell = pkgs.zsh;
 
