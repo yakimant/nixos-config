@@ -96,6 +96,7 @@
         "netspot"
         "nextcloud"
         "onlyoffice"
+        "openzfs"
         "parallels"
         "peakhour"
         "proton-mail-bridge"
