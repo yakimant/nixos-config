@@ -4,14 +4,10 @@
 
 {
   imports = [
-    ../../modules/basic.nix
-    ../../modules/basic-linux.nix
-    ../../modules/nix.nix
-    ../../modules/tools-basic.nix
-    ../../modules/tools-linux.nix
-    ../../modules/tools-desktop.nix
-    ../../modules/users.nix
-    ../../modules/sway.nix
+    ../../modules/base
+    ../../modules/linux
+    ../../modules/desktop.nix
+    ../../modules/linux-desktop
     ./disk-config.nix
     ./hardware-configuration.nix
   ];

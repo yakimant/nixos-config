@@ -68,6 +68,7 @@ ansible-lint
       xq
       yandex-cloud
       yq
+      yubikey-manager
       yt-dlp
       zbar
   ];
