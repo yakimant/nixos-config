@@ -6,9 +6,11 @@ let
   users = yakimant;
 
   qnap = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPsHtmRlKCqa8n8p/KVJJ5GOJQccpjnlbkecqhqi5086";
-  servers = [ qnap ];
+  thinkpad = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICEGpYbcECL6aRWEpGZLKcGwlR3Fuejf9XiXrh/NHMeD";
+  linux = [ qnap thinkpad ];
 in
 {
   "service/tailscale/qnap.age" = { publicKeys = yakimant ++ [ qnap ]; };
-  "users/yakimant/pass-hash.age" = { publicKeys = yakimant ++ servers; };
+  "service/tailscale/thinkpad.age" = { publicKeys = yakimant ++ [ thinkpad ]; };
+  "users/yakimant/pass-hash.age" = { publicKeys = yakimant ++ linux; };
 }
