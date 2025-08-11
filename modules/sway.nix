@@ -8,6 +8,7 @@
     grim slurp # screenshots
     wl-clipboard # clipboard
     mako # notifications
+    brightnessctl # brightness
   ];
 
   programs.sway.enable = true;
