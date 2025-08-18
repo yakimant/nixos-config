@@ -10,10 +10,10 @@
         right = "noop";
         up = "noop";
         down = "noop";
-        "control+[" = "noop";
       };
       control = {
-        "[" = "noop";
+        # TODO: disable later
+        #"[" = "noop";
       };
       nav = {
         h = "left";
