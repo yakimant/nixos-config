@@ -35,7 +35,7 @@ in {
     neovim
     nmap
     openssh
-#openssl
+    openssl
     pssh
     python311
 #pythonPackages
