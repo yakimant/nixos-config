@@ -67,8 +67,8 @@
         "brave-browser"
         "bruno"
         "chatgpt"
-        "chromium"
         "cold-turkey-blocker"
+        "contexts"
         "cyberduck"
         "db-browser-for-sqlite"
         "dbeaver-community"
@@ -116,6 +116,7 @@
         "transmission"
         "tunnelbear"
         "ubiquiti-unifi-controller"
+        "ungoogled-chromium"
         "utm"
         # https://github.com/orgs/Homebrew/discussions/6181
         # "viber"
