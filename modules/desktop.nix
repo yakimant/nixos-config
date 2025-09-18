@@ -47,6 +47,7 @@ ansible-lint
       nixos-anywhere
       nixos-rebuild
       nodejs_24
+      oath-toolkit
       opentofu
       pass
       passage

@@ -48,6 +48,7 @@
       "Reeder"         = 1529448980;
       "Remote Desktop" = 409907375;
       "WireGuard"      = 1451685025;
+      "Xcode"          = 497799835;
     };
 
     caskArgs.no_quarantine = true;
@@ -63,6 +64,7 @@
         "alacritty"
         "android-commandlinetools"
         "balenaetcher"
+        "breaktimer"
         "bluestacks"
         "brave-browser"
         "bruno"

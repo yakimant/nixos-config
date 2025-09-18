@@ -34,6 +34,8 @@ disko-install host:
   sudo nixos-install --no-channel-copy --no-root-password --flake .#{{ host }}
 
 darwin:
+  sudo xcodebuild -license accept
+  sudo scutil --set LocalHostName $(scutil --get HostName)
   sudo darwin-rebuild switch --flake .
 
 nixos-remote host: _check_remote_builder_ssh

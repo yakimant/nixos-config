@@ -10,6 +10,7 @@ let
   #);
 in {
   environment.systemPackages = with pkgs; [
+    ansible
     aria2
     btop
     coreutils
@@ -20,6 +21,7 @@ in {
     fswatch
     fzf
     gawk
+    gh
     git
     gnumake
     gnused
@@ -33,6 +35,8 @@ in {
     mtr
 #ncdu # move from linux-tools when mac issues fixed
     neovim
+    # https://github.com/NixOS/nixpkgs/pull/408290
+    #nerdlog
     nmap
     openssh
     openssl
