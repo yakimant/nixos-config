@@ -8,7 +8,25 @@
       unstable.yabai
       yubikey-manager
       xcodes
+
+      # status-desktop mobile
+      act
+      android-tools
+      androidenv.androidPkgs.androidsdk
+      qt6.full
+      jdk17
+      # (androidenv.androidPkgs.androidsdk {
+      #   platformToolsVersion = "34.0.5";
+      #   buildToolsVersions = [ "34.0.0" ];
+      #   toolsVersion = "26.1.1";
+      #   includeEmulator = true;
+      #   includeSources = false;
+      #   includeDocs = false;
+      #   platforms = [ "android-34" ];
+      # })
   ];
+
+  # programs.android_sdk.accept_license = true;
 
   homebrew = {
     enable = true;
@@ -16,7 +34,7 @@
       autoUpdate = true;
       # updates homebrew packages on activation,
       # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
-      upgrade = true;
+       upgrade = true;
       cleanup = "zap";
     };
 
@@ -62,7 +80,7 @@
         "adium"
         "aegisub"
         "alacritty"
-        "android-commandlinetools"
+        # "android-commandlinetools"
         "balenaetcher"
         "breaktimer"
         "bluestacks"
@@ -118,6 +136,7 @@
         "transmission"
         "tunnelbear"
         "ubiquiti-unifi-controller"
+        "uhk-agent"
         "ungoogled-chromium"
         "utm"
         # https://github.com/orgs/Homebrew/discussions/6181
