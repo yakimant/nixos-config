@@ -34,7 +34,7 @@
       autoUpdate = true;
       # updates homebrew packages on activation,
       # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
-       upgrade = true;
+      upgrade = true;
       cleanup = "zap";
     };
 
@@ -142,6 +142,7 @@
         # https://github.com/orgs/Homebrew/discussions/6181
         # "viber"
         "vlc"
+        "vk-calls"
         "vmware-fusion"
         "windows-app"
         "xquartz"
