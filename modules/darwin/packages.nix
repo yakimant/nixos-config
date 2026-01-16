@@ -78,6 +78,7 @@
       greedyCasks [
         "1password"
         "adium"
+        "adobe-acrobat-pro"
         "aegisub"
         "alacritty"
         "anythingllm"
@@ -103,6 +104,7 @@
         "gotomeeting"
         "gpt4all"
         "handbrake-app"
+        "ioquake3"
         "jordanbaird-ice"
         "kaleidoscope"
         "karabiner-elements"

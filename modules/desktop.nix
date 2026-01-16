@@ -37,8 +37,10 @@ ansible-lint
       go
       google-clasp
       google-cloud-sdk
+      graphviz
       hcloud
       hugo
+      innoextract
       matrix-commander
       makefile2graph
       markdownlint-cli
@@ -49,6 +51,7 @@ ansible-lint
       nodejs_24
       oath-toolkit
       opentofu
+      p7zip
       pass
       passage
       pidgin
@@ -58,6 +61,7 @@ ansible-lint
       qemu_kvm
       qrencode
 #qsv
+      s3cmd
       s5cmd
       shellcheck
       signal-cli
