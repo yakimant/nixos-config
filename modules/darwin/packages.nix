@@ -10,11 +10,13 @@
       xcodes
 
       # status-desktop mobile
-      act
-      android-tools
-      androidenv.androidPkgs.androidsdk
-      qt6.full
-      jdk17
+      # act
+      # android-tools
+      # be careful with heavy
+      # /nix/store/*-android-sdk-system-image-*
+      # androidenv.androidPkgs.androidsdk
+      # qt6.full
+      # jdk17
       # (androidenv.androidPkgs.androidsdk {
       #   platformToolsVersion = "34.0.5";
       #   buildToolsVersions = [ "34.0.0" ];
@@ -102,7 +104,7 @@
         "google-chrome"
         "google-drive"
         "gotomeeting"
-        "gpt4all"
+        "grandperspective"
         "handbrake-app"
         "ioquake3"
         "jordanbaird-ice"
@@ -144,8 +146,7 @@
         "uhk-agent"
         "ungoogled-chromium"
         "utm"
-        # https://github.com/orgs/Homebrew/discussions/6181
-        # "viber"
+        "viber"
         "vlc"
         "vk-calls"
         "vmware-fusion"
