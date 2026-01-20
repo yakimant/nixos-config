@@ -115,14 +115,14 @@
         specialArgs = { inherit inputs; nixpkgs = nixpkgs-darwin; };
       };
 
-      nixosConfigurations."holesky" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      nixosConfigurations."rock5b" = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
 #pkgs = nixpkgs.legacyPackages.${system};
         modules = [
           overlayModule
           disko.nixosModules.disko
           agenix.nixosModules.default
-          ./hosts/holesky/configuration.nix
+          ./hosts/rock5b/configuration.nix
 
           # optional: add nixos modules via the default nixosModule
 #ethereum-nix.nixosModules.default

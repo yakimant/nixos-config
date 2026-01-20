@@ -1,23 +1,15 @@
 {
   modulesPath,
-  pkgs,
   ...
 }:
 
 {
   imports = [
-    ../../modules/basic.nix
-    ../../modules/basic-linux.nix
-    ../../modules/tools-basic.nix
-    ../../modules/tools-linux.nix
-    ../../modules/nimbus-beacon.nix
-    ../../modules/geth.nix
-    ../../modules/mev-boost.nix
-    ../../modules/nix.nix
-    ../../modules/users.nix
-    (modulesPath + "/installer/scan/not-detected.nix")
-    (modulesPath + "/profiles/qemu-guest.nix")
+    ../../modules/base
+    ../../modules/linux
+    ../../modules/ethereum
     ./disk-config.nix
+    ./hardware-configuration.nix
   ];
 
   #swapDevices = [ { device = "/swapfile"; size = 8192; } ];
