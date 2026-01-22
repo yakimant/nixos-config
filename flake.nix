@@ -65,7 +65,7 @@
     nixpkgs-unstable,
     ... }:
     let
-      stableSystems = ["x86_64-linux" "aarch64-darwin"];
+      stableSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
       forAllSystems = nixpkgs.lib.genAttrs stableSystems;
       pkgsFor = nixpkgs.lib.genAttrs stableSystems (
         system: import nixpkgs { inherit system; config.allowUnfree = true; }
