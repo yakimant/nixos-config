@@ -90,6 +90,7 @@
             just
             nix-output-monitor
             nixos-anywhere
+            nixos-install-tools
             #disko
           ];
         };
