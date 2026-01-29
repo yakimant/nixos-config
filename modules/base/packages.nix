@@ -41,6 +41,7 @@ in {
     nmap
     openssh
     openssl
+    prettier
     pssh
     python311
 #pythonPackages
