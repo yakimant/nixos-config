@@ -90,7 +90,7 @@
             just
             nix-output-monitor
             nixos-anywhere
-            #disko
+            disko.packages.${system}.default
           ] ++ lib.optionals (system != "aarch64-darwin") [
             nixos-install-tools
           ];
