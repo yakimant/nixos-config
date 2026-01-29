@@ -8,7 +8,7 @@
     ../../modules/linux
     ../../modules/ethereum
     ./disk-config.nix
-    ./hardware-configuration.nix
+    # ./hardware-configuration.nix
   ];
 
   #swapDevices = [ { device = "/swapfile"; size = 8192; } ];
@@ -31,7 +31,7 @@
   };
 
   networking = {
-    hostName = "holesky";
+    hostName = "rock5b";
     hostId = "4d57ec25"; # random number, required for ZFS
   };
 
