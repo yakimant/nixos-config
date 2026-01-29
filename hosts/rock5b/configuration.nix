@@ -1,5 +1,4 @@
 {
-  modulesPath,
   ...
 }:
 
@@ -21,6 +20,8 @@
     efiInstallAsRemovable = true;
   };
 
+  boot.zfs.requestEncryptionCredentials = false;
+
   services.openssh = {
     enable = true;
     settings = {
@@ -34,5 +35,5 @@
     hostId = "4d57ec25"; # random number, required for ZFS
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 }

@@ -1,108 +1,99 @@
-# USAGE in your configuration.nix.
-# Update devices to match your hardware.
-# {
-#  imports = [ ./disko-config.nix ];
-#  disko.devices.disk.main.device = "/dev/sda";
-# }
 {
   disko.devices = {
     disk = {
       main = {
-        device = "/dev/sda";
+        device = "/dev/disk/by-id/nvme-Samsung_SSD_990_PRO_2TB_S7DNNU0Y619285Z";
         type = "disk";
         content = {
           type = "gpt";
           partitions = {
-            boot = {
-              name = "boot";
-              size = "1M";
-              type = "EF02";
-            };
-            esp = {
-              name = "ESP";
-              size = "500M";
+            ESP = {
+              size = "1G";
               type = "EF00";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                #mountOptions = [ "umask=0077" ];
+                mountOptions = [ "umask=0077" ];
               };
             };
-            zfs_main = {
-              name = "zfs_main";
-              size = "100%";
+            zfs = {
+              end = "-16G";
               content = {
                 type = "zfs";
                 pool = "zroot";
               };
             };
-          };
-        };
-      };
-      data = {
-        device = "/dev/sdb";
-        type = "disk";
-#content = {
-#          type = "zfs";
-#          pool = "zdata";
-#        };
-        content = {
-          type = "gpt";
-          partitions = {
-            zfs_data = {
-              name = "zfs_data";
-              size = "100%";
+            swap = {
+              size = "16G";
               content = {
-                type = "zfs";
-                pool = "zdata";
+                type = "swap";
+                randomEncryption = true;
               };
             };
           };
         };
       };
     };
-    zpool = {
-      zroot = {
-        type = "zpool";
-        rootFsOptions = {
-          # https://wiki.archlinux.org/title/Install_Arch_Linux_on_ZFS
-          acltype = "posixacl";
-          atime = "off";
-          compression = "zstd";
-          mountpoint = "none";
-          xattr = "sa";
+    zpool = let
+      rootFsOptions = {
+        # https://openzfs.github.io/openzfs-docs/man/v2.3/7/zfsprops.7.html
+        acltype = "posixacl";
+        atime = "off";
+        compression = "zstd";
+        dnodesize = "auto";
+        mountpoint = "none";
+        normalization = "formD";
+        xattr = "sa";
         };
-        options.ashift = "12";
 
-        datasets = {
-          "root" = {
-            type = "zfs_fs";
-            mountpoint = "/";
-          };
-          "nix" = {
-            type = "zfs_fs";
-            mountpoint = "/nix";
-          };
-        };
+      mkZfsDataSet = mountpoint: quota: snapshot: options: mountOptions: {
+        type = "zfs_fs";
+        inherit mountpoint;
+        # https://openzfs.github.io/openzfs-docs/man/v2.3/7/zfsprops.7.html
+        options = {
+          inherit quota;
+          reservation = quota;
+          # Used by services.zfs.autoSnapshot options.
+          "com.sun:auto-snapshot" = if snapshot then "true" else "false";
+          mountpoint = "legacy";
+        } // options;
+        # https://man7.org/linux/man-pages/man5/fstab.5.html
+        inherit mountOptions;
       };
-      zdata = {
+
+      reserve = mkZfsDataSet null "10G" false { } []; #canmount = "off"; } [ ];
+    in {
+      rpool = {
         type = "zpool";
-        rootFsOptions = {
-          # https://wiki.archlinux.org/title/Install_Arch_Linux_on_ZFS
-          acltype = "posixacl";
-          atime = "off";
-          compression = "zstd";
-          mountpoint = "none";
-          xattr = "sa";
-        };
-        options.ashift = "12";
+        inherit rootFsOptions;
+        # https://openzfs.github.io/openzfs-docs/man/v2.3/7/zpoolprops.7.html
+        # physical sector size: `sudo fdisk -l` to confirm
+        options.ashift = "0"; # auto, but probably 512B
 
         datasets = {
-          "data" = {
-            type = "zfs_fs";
-            mountpoint = "/data";
-          };
+          # postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot/local/root@blank$' || zfs snapshot zroot/local/root@blank";
+          root     = mkZfsDataSet "/"         "10G" true  { } [ "defaults" ];
+          nix      = mkZfsDataSet "/nix"      "40G" false { } [ "defaults" ];
+          home     = mkZfsDataSet "/home"     "10G" true  { } [ "defaults" ];
+          persist  = mkZfsDataSet "/persist"  "1G"  true  { } [ "defaults" ];
+
+          nimbus-beacon-node  = mkZfsDataSet "/var/lib/private/nimbus-beacon-node"  "500M"  true  { } [ "defaults" ];
+          geth  = mkZfsDataSet "/var/lib/private/geth"  "500M"  true  { } [ "defaults" ];
+
+          "secret/nimbus/secrets" = mkZfsDataSet "/var/lib/private/nimbus-beacon-node/secrets" "none" true  {
+            encryption = "aes-256-gcm";
+            keyformat = "passphrase";
+            keylocation = "prompt";
+          } [ "noauto" "nofail" ];
+
+          "secret/nimbus/validators" = mkZfsDataSet "/var/lib/private/nimbus-beacon-node/validators" "none" true  {
+            encryption = "aes-256-gcm";
+            keyformat = "passphrase";
+            keylocation = "prompt";
+          } [ "noauto" "nofail" ];
+
+          inherit reserve;
         };
       };
     };

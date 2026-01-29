@@ -90,8 +90,9 @@
             just
             nix-output-monitor
             nixos-anywhere
-            nixos-install-tools
             #disko
+          ] ++ lib.optionals (system != "aarch64-darwin") [
+            nixos-install-tools
           ];
         };
       });

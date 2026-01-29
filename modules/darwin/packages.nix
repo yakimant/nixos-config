@@ -43,6 +43,7 @@
     global.brewfile = true;
 
     brews = [
+      # remove after upgrade
       "ncdu"
       "m1-terraform-provider-helper"
       "go" # required for m1-terraform-provider-helper

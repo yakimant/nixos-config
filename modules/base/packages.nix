@@ -33,7 +33,8 @@ in {
     just
     mosh
     mtr
-#ncdu # move from linux-tools when mac issues fixed
+    # uncomment after upgrade
+    #ncdu
     neovim
     # https://github.com/NixOS/nixpkgs/pull/408290
     #nerdlog
@@ -54,7 +55,8 @@ in {
     zsh
   ] ++ lib.optionals isLinux [
     lsof
-    ncdu # move to above general list when mac issue fixed
+    # remove after upgrade
+    ncdu
     parted
   ];
 }
