@@ -41,7 +41,8 @@ in {
     nmap
     openssh
     openssl
-    prettier
+    # wait for nixpkgs?
+    # prettier
     pssh
     python311
 #pythonPackages

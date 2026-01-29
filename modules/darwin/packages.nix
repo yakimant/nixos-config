@@ -47,6 +47,7 @@
       "ncdu"
       "m1-terraform-provider-helper"
       "go" # required for m1-terraform-provider-helper
+      "prettier"
     ];
 
     taps = [
