@@ -21,8 +21,8 @@ default:
 update:
   nix flake update
 
-nixos-anywhere host:
-  nixos-anywhere --build-on-remote --flake .#{{ host }} root@{{ host }}
+nixos-anywhere host ip:
+  nixos-anywhere --build-on remote --copy-host-keys --flake .#{{ host }} root@{{ ip }}
 
 # TODO: switch to disko-install
 # https://github.com/nix-community/disko/issues/947
@@ -30,7 +30,7 @@ nixos-anywhere host:
 #--flake .#{{ host }}  --write-efi-boot-entries \
 #--disk main {{ disk }}
 disko-install host:
-  sudo disko --mode disko --flake .#{{ host }}
+  disko --mode disko --flake .#{{ host }}
   sudo nixos-install --no-channel-copy --no-root-password --flake .#{{ host }}
 
 darwin:
@@ -61,3 +61,6 @@ nixos-dry:
 
 repl:
   nix repl --file repl.nix
+
+agenix-rekey:
+  cd secrets && agenix --rekey

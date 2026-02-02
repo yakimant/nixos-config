@@ -1,6 +1,5 @@
 TODO:
 
-- [ ] disko file: encrypted datasets for keys, swap (build nimbus?)
 - [ ] hardware file
 - [ ] eth hoodi setup
 

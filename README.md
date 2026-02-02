@@ -1,5 +1,7 @@
 # NixOS Configuration
 
+
+
 ## Update
 
 ```sh
@@ -39,3 +41,7 @@ darwin-rebuild switch --flake .
 ### Links
 
 - [Darwin Configuration Options](https://daiderd.com/nix-darwin/manual/index.html)
+
+### Known issues
+
+- [nixos-anywhere doesnt work with preset ssh keys](https://github.com/nix-community/nixos-anywhere/issues/436)

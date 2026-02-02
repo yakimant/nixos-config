@@ -1,8 +1,8 @@
 {
   disko.devices = {
     disk = {
-      main = {
-        device = "/dev/disk/by-id/nvme-Samsung_SSD_990_PRO_2TB_S7DNNU0Y619285Z";
+      disk1 = {
+        device = "/dev/disk/by-id/nvme-SAMSUNG_MZVLB1T0HALR-00000_S3W6NX0M103312";
         type = "disk";
         content = {
           type = "gpt";
@@ -29,6 +29,22 @@
               content = {
                 type = "swap";
                 randomEncryption = true;
+              };
+            };
+          };
+        };
+      };
+      disk2 = {
+        device = "/dev/disk/by-id/nvme-SAMSUNG_MZVLB1T0HALR-00000_S3W6NX0M103315";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            zfs = {
+              size = "100%";
+              content = {
+                type = "zfs";
+                pool = "rpool";
               };
             };
           };
@@ -78,8 +94,8 @@
           home     = mkZfsDataSet "/home"     "10G" true  { } [ "defaults" ];
           persist  = mkZfsDataSet "/persist"  "1G"  true  { } [ "defaults" ];
 
-          nimbus-beacon-node  = mkZfsDataSet "/var/lib/private/nimbus-beacon-node"  "500M"  true  { } [ "defaults" ];
-          geth  = mkZfsDataSet "/var/lib/private/geth"  "500M"  true  { } [ "defaults" ];
+          nimbus-beacon-node  = mkZfsDataSet "/var/lib/private/nimbus-beacon-node"  "100G"  true  { } [ "defaults" ];
+          geth  = mkZfsDataSet "/var/lib/private/geth"  "100G"  true  { } [ "defaults" ];
 
           "secret/nimbus/secrets" = mkZfsDataSet "/var/lib/private/nimbus-beacon-node/secrets" "none" true  {
             encryption = "aes-256-gcm";
