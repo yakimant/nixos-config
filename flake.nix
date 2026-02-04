@@ -42,8 +42,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # remove backup/restore libs broke nimbus
     ethereum-nix = {
-      url = "github:nix-community/ethereum.nix";
+      url = "github:nix-community/ethereum.nix/8f01580481e88e169b7ada56f1500dccd6cefe61";
       inputs = {
         nixpkgs.follows = "nixpkgs-unstable";
       };
