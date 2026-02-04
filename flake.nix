@@ -44,12 +44,8 @@
 
     ethereum-nix = {
       url = "github:nix-community/ethereum.nix";
-      #url = "github:metacraft-labs/ethereum.nix/3b34218a88c25e2e8801e87875b2572155843f32";
-      #url = "github:metacraft-labs/ethereum.nix";
       inputs = {
-        nixpkgs.follows = "nixpkgs-2405";
-        nixpkgs-2311.follows = "nixpkgs-2311";
-        nixpkgs-unstable.follows = "nixpkgs-unstable";
+        nixpkgs.follows = "nixpkgs-unstable";
       };
     };
   };
