@@ -63,8 +63,9 @@
         # /var/run/reth/jwtsecret
       };
       http = {
-        enable = true;
+        enable = false;
         port = 8545;
+        # api = 
       };
       ws.enable = false;
     };
