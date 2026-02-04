@@ -1,7 +1,8 @@
 TODO:
 
-- [ ] eth hoodi setup
-
+- eth hoodi setup
+  - [ ] reth: jwt secret
+  - [ ] reth: user and folder
 - [ ] agenix for secrets (jwt, validator key) https://nix-community.github.io/nixos-anywhere/howtos/secrets.html
 - [ ] setup date sync (timedatectl?)
 - [ ] fix reboot - ZFS issue

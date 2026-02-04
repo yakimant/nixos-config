@@ -84,12 +84,13 @@
         default = pkgs.mkShellNoCC {
           shellHook =
             ''
-              source .envrc.nix-config
+              # source .envrc.nix-config
             '';
           packages = with pkgs.buildPackages; [
             just
             nix-output-monitor
             nixos-anywhere
+            nixos-rebuild-ng
             disko.packages.${system}.default
           ] ++ lib.optionals (system != "aarch64-darwin") [
             nixos-install-tools

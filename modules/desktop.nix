@@ -47,7 +47,8 @@ ansible-lint
       mdbook
       firacode
       nixos-anywhere
-      nixos-rebuild
+      # nixos-rebuild
+      nixos-rebuild-ng
       nodejs_24
       oath-toolkit
       opentofu
