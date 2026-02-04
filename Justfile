@@ -38,25 +38,26 @@ darwin:
   sudo scutil --set LocalHostName $(scutil --get HostName)
   sudo darwin-rebuild switch --flake .
 
-#nixos-remote host: _check_remote_builder_ssh
-nixos-remote host:
-  nixos-rebuild-ng switch --flake .#{{ host }} \
-  --sudo \
-  --target-host {{ host }} \
-  --builders 'ssh-ng://yakimant@178.63.54.221 x86_64-linux - 2 1 - - -' \
-  --use-substitutes \
-  --no-reexec \
-  --verbose
-  # --max-jobs 0 \
-  # builders = ssh-ng://${NIX_REMOTE_BUILDER_USER:-yakimant}@${NIX_REMOTE_BUILDER_ADDR:-qnap.tail39c650.ts.net} x86_64-linux - ${NIX_REMOTE_BUILDER_CORES:-2} 1 - - -
-
-nixos-remote-dry host: _check_remote_builder_ssh
-  nixos-rebuild dry-activate --flake .#{{ host }} \
-  --use-remote-sudo --target-host {{ host }} \
-  --build-host {{ host }} \
-  --use-substitutes \
-  --max-jobs 0 \
-  --fast
+# FIXME: Doesnt work on macOS, due to yubikey ssh -sk keys. Try on linux.
+##nixos-remote host: _check_remote_builder_ssh
+#nixos-remote host:
+#  nixos-rebuild-ng switch --flake .#{{ host }} \
+#  --sudo \
+#  --target-host {{ host }} \
+#  --builders 'ssh-ng://yakimant@178.63.54.221 x86_64-linux - 2 1 - - -' \
+#  --use-substitutes \
+#  --no-reexec \
+#  --verbose
+#  # --max-jobs 0 \
+#  # builders = ssh-ng://${NIX_REMOTE_BUILDER_USER:-yakimant}@${NIX_REMOTE_BUILDER_ADDR:-qnap.tail39c650.ts.net} x86_64-linux - ${NIX_REMOTE_BUILDER_CORES:-2} 1 - - -
+#
+#nixos-remote-dry host: _check_remote_builder_ssh
+#  nixos-rebuild dry-activate --flake .#{{ host }} \
+#  --use-remote-sudo --target-host {{ host }} \
+#  --build-host {{ host }} \
+#  --use-substitutes \
+#  --max-jobs 0 \
+#  --fast
 
 nixos:
   sudo nixos-rebuild switch --flake .
