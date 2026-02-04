@@ -2,6 +2,9 @@ hosts-domain := "tail39c650.ts.net"
 remote-builder-ssh-addr := env('NIX_REMOTE_BUILDER_ADDR', "qnap."+hosts-domain)
 remote-builder-ssh-user := env('NIX_REMOTE_BUILDER_USER', 'yakimant')
 
+default:
+  @just --list
+
 [private]
 _check_remote_builder_ssh:
   #!/usr/bin/env bash
@@ -14,9 +17,6 @@ _check_remote_builder_ssh:
       exit 1
     fi
   fi
-
-default:
-  @just --list
 
 update:
   nix flake update
