@@ -1,7 +1,17 @@
 {
+  inputs,
+  lib,
+  ...
+}:
+
+{
+  environment.systemPackages = with inputs.ethereum-nix.packages.x86_64-linux; [
+    staking-deposit-cli
+  ];
+
   imports = [
-    ./nimbus-beacon.nix
-    ./geth.nix
-    ./mev-boost.nix
+    ./nimbus-beacon-node.nix
+    ./reth.nix
+    # ./mev-boost.nix
   ];
 }

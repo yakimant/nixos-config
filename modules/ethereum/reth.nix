@@ -8,27 +8,9 @@
     inputs.ethereum-nix.nixosModules.default
   ];
 
-  environment.systemPackages = with inputs.ethereum-nix.packages.x86_64-linux; [
-    reth
-  ];
-
-  # users.users.geth-holesky = {
-  #   group = "geth-holesky";
-  #   home = "/data/geth-holesky";
-  #   uid = 6001;
-  #   description = "geth-holesky service user";
-  #   isSystemUser = true;
-  #   createHome = true;
-  # };
-  #
-  # users.groups.geth-holesky = {
-  #   gid = 6001;
-  # };
-  #
-  # networking.firewall = {
-  #   allowedTCPPorts = [ 30303 ];
-  #   allowedUDPPorts = [ 30303 ];
-  # };
+  # environment.systemPackages = with inputs.ethereum-nix.packages.x86_64-linux; [
+  #   reth
+  # ];
 
   services.ethereum.reth.hoodi = {
     enable = true;
@@ -70,9 +52,4 @@
       ws.enable = false;
     };
   };
-
-  # systemd.services.geth-holesky.serviceConfig = {
-  #   DynamicUser = lib.mkForce false;
-  #   User = lib.mkForce "geth-holesky";
-  # };
 }

@@ -6,7 +6,7 @@
   imports = [
     ../../modules/base
     ../../modules/linux
-    ../../modules/ethereum/reth.nix
+    ../../modules/ethereum
     ./disk-config.nix
     ./hardware-configuration.nix
   ];
