@@ -1,13 +1,14 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, inputs,... }:
 
 let
   isLinux = pkgs.stdenv.isLinux;
   #isDarwin = pkgs.stdenv.isDarwin;
-  #pythonPackages = pkgs.python311.withPackages (
-  #  _: with (pkgs.python311Packages); [
-  #     #rpds-py
-  #  ]
-  #);
+  pythonWithPackages = pkgs.python313.withPackages (
+    _: with (pkgs.python313Packages); [
+      pip
+      huggingface-hub[hf_xet]
+    ]
+  );
 in {
   environment.systemPackages = with pkgs; [
     ansible
@@ -44,8 +45,8 @@ in {
     # wait for nixpkgs?
     # prettier
     pssh
-    python311
-#pythonPackages
+    # python311
+    pythonWithPackages
     ripgrep
     rsync
     socat
@@ -60,5 +61,8 @@ in {
     # remove after upgrade
     ncdu
     parted
-  ];
+  ] ++ (with inputs.disko.packages.${pkgs.system}; [
+      disko
+      disko-install
+  ]);
 }
