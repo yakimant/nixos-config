@@ -94,16 +94,16 @@
           home     = mkZfsDataSet "/home"     "10G" true  { } [ "defaults" ];
           persist  = mkZfsDataSet "/persist"  "1G"  true  { } [ "defaults" ];
 
-          nimbus-beacon-node  = mkZfsDataSet "/var/lib/private/nimbus-beacon-node"  "100G"  true  { } [ "defaults" ];
-          geth  = mkZfsDataSet "/var/lib/private/geth"  "100G"  true  { } [ "defaults" ];
+          nimbus-beacon-node  = mkZfsDataSet "/var/lib/private/nimbus-beacon-hoodi"  "500G"  true  { } [ "defaults" ];
+          geth  = mkZfsDataSet "/var/lib/private/reth-hoodi"  "500G"  true  { } [ "defaults" ];
 
-          "secret/nimbus/secrets" = mkZfsDataSet "/var/lib/private/nimbus-beacon-node/secrets" "none" true  {
+          "secret/nimbus/secrets" = mkZfsDataSet "/var/lib/private/nimbus-beacon-hoodi/secrets" "none" true  {
             encryption = "aes-256-gcm";
             keyformat = "passphrase";
             keylocation = "prompt";
           } [ "noauto" "nofail" ];
 
-          "secret/nimbus/validators" = mkZfsDataSet "/var/lib/private/nimbus-beacon-node/validators" "none" true  {
+          "secret/nimbus/validators" = mkZfsDataSet "/var/lib/private/nimbus-beacon-hoodi/validators" "none" true  {
             encryption = "aes-256-gcm";
             keyformat = "passphrase";
             keylocation = "prompt";
