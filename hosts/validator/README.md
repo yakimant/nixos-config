@@ -2,9 +2,9 @@ TODO:
 
 - eth hoodi setup
   - [ ] reth: jwt secret
-  - [ ] reth: zfs dataset
+  - [ ] reth: disable file log
   - [ ] nimbus: jwt secret
-  - [ ] nimbus: zfs dataset
+- [ ] reth/nimbus data dir
 - [ ] agenix for secrets (jwt, validator key) https://nix-community.github.io/nixos-anywhere/howtos/secrets.html
 - [ ] setup date sync (timedatectl?)
 - [ ] fix reboot - ZFS issue

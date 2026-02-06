@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   ...
 }:
@@ -8,27 +9,11 @@
     inputs.ethereum-nix.nixosModules.default
   ];
 
-  environment.systemPackages = with inputs.ethereum-nix.packages.x86_64-linux; [
-    nimbus
-  ];
-
-  # users.users.nimbus-beacon-holesky = {
-  #   group = "nimbus-beacon-holesky";
-  #   home = "/data/nimbus-beacon-holesky";
-  #   uid = 6000;
-  #   description = "nimbus-beacon-holesky service user";
-  #   isSystemUser = true;
-  #   createHome = true;
-  # };
-  #
-  # users.groups.nimbus-beacon-holesky = {
-  #   gid = 6000;
-  # };
-  #
-  # networking.firewall = {
-  #   allowedTCPPorts = [ 9000 ];
-  #   allowedUDPPorts = [ 9000 ];
-  # };
+  age.secrets = {
+    "service/reth/authrpc-jwt" = {
+      file = ../../secrets/service/reth/authrpc-jwt.age;
+    };
+  };
 
   services.ethereum.nimbus-beacon.hoodi = {
     enable = true;
@@ -37,23 +22,22 @@
     package = inputs.ethereum-nix.packages.x86_64-linux.nimbus;
     args = {
       network = "hoodi";
-      # data-dir = "/data/nimbus-beacon-holesky";
       trusted-node-url = "http://testing.hoodi.beacon-api.nimbus.team";
       el = [ "http://127.0.0.1:8551" ];
-      # jwt-secret = "/data/nimbus-beacon-holesky/jwt-secret";
-      # user = "nimbus-beacon-holesky";
+      jwt-secret = config.age.secrets."service/reth/authrpc-jwt".path;
       tcp-port = 9000;
       udp-port = 9000;
       metrics = {
         enable = true;
         port = 5054;
+        # addr = metrics-host
       };
       rest = {
         enable = false;
-        port = 5052;
+        # port = 5052;
       };
       payload-builder = {
-        enable = true;
+        enable = false;
         url = "http://127.0.0.1:18550";
       };
     };
@@ -61,8 +45,4 @@
     #   "--local-block-value-boost=0"
     # ];
   };
-
-  # systemd.services.nimbus-beacon-holesky.serviceConfig = {
-  #   DynamicUser = lib.mkForce false;
-  # };
 }

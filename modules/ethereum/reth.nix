@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   ...
 }:
@@ -8,9 +9,11 @@
     inputs.ethereum-nix.nixosModules.default
   ];
 
-  # environment.systemPackages = with inputs.ethereum-nix.packages.x86_64-linux; [
-  #   reth
-  # ];
+  age.secrets = {
+    "service/reth/authrpc-jwt" = {
+      file = ../../secrets/service/reth/authrpc-jwt.age;
+    };
+  };
 
   services.ethereum.reth.hoodi = {
     enable = true;
@@ -37,11 +40,12 @@
       metrics = {
         enable = true;
         port = 6060;
+        # addr = metrics-host
       };
       authrpc = {
         port = 8551;
-        # addr = metrics-host
         # jwtsecret = "/data/nimbus-beacon-holesky/jwt-secret";
+        jwtsecret = config.age.secrets."service/reth/authrpc-jwt".path;
         # /var/run/reth/jwtsecret
       };
       http = {

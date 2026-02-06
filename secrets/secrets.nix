@@ -1,7 +1,7 @@
 let
   yakimant = [
-    "age1yubikey1qv8svrrl7grjjeh5qllgpz6wn3c85xsxu87y5hk0untqtsnr36tjxrwzt0d"
-    "age1yubikey1q28qjdfnktl7rdd4wk84tgt3jx30nm8m7ac4x5qcw57ujtqtzfqexkm67tf"
+    "age1yubikey1qfedhpwa0jdnflnvkyw0au3r2slh68wqyna6mzjee4206a6vp0xqshlr8r3"
+    "age1yubikey1qfp23hg0l5t5fgtac4hrfz9dk9mjrfvjuujhhelxkwh3309hej8ju0cytuh"
   ];
   users = yakimant;
 
@@ -14,5 +14,6 @@ in
   "service/tailscale/qnap.age" = { publicKeys = yakimant ++ [ qnap ]; };
   "service/tailscale/thinkpad.age" = { publicKeys = yakimant ++ [ thinkpad ]; };
   "service/tailscale/validator.age" = { publicKeys = yakimant ++ [ validator ]; };
+  "service/reth/authrpc-jwt.age" = { publicKeys = yakimant ++ [ validator ]; };
   "users/yakimant/pass-hash.age" = { publicKeys = yakimant ++ linux; };
 }
