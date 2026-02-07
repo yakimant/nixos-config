@@ -106,7 +106,7 @@
           root     = mkZfsDataSet "/"         "10G" true  { } [ "defaults" ];
           nix      = mkZfsDataSet "/nix"      "40G" false { } [ "defaults" ];
           home     = mkZfsDataSet "/home"     "10G" true  { } [ "defaults" ];
-          persist  = mkZfsDataSet "/persist"  "1G"  true  { } [ "defaults" ];
+          # persist  = mkZfsDataSet "/persist"  "1G"  true  { } [ "defaults" ];
           inherit reserve;
         };
       };

@@ -92,7 +92,7 @@
           root     = mkZfsDataSet "/"         "10G" true  { } [ "defaults" ];
           nix      = mkZfsDataSet "/nix"      "40G" false { } [ "defaults" ];
           home     = mkZfsDataSet "/home"     "10G" true  { } [ "defaults" ];
-          persist  = mkZfsDataSet "/persist"  "1G"  true  { } [ "defaults" ];
+          # persist  = mkZfsDataSet "/persist"  "1G"  true  { } [ "defaults" ];
 
           nimbus-beacon-node  = mkZfsDataSet "/var/lib/private/nimbus-beacon-hoodi"  "500G"  true  { } [ "defaults" ];
           geth  = mkZfsDataSet "/var/lib/private/reth-hoodi"  "500G"  true  { } [ "defaults" ];

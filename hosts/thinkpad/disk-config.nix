@@ -73,14 +73,14 @@
               mountpoint = "legacy";
             };
           };
-          "local/persist" = {
-            type = "zfs_fs";
-            mountpoint = "/persist";
-            options = {
-              "com.sun:auto-snapshot" = "true";
-              mountpoint = "legacy";
-            };
-          };
+          # "local/persist" = {
+          #   type = "zfs_fs";
+          #   mountpoint = "/persist";
+          #   options = {
+          #     "com.sun:auto-snapshot" = "true";
+          #     mountpoint = "legacy";
+          #   };
+          # };
           "local/root" = {
             type = "zfs_fs";
             mountpoint = "/";
