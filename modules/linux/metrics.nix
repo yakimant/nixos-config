@@ -17,9 +17,9 @@ in {
     disabledCollectors = [ "textfile" ];
     openFirewall = true;
     # iptables:
-    #firewallFilter = "-i ${vpnInterfaceName} -p tcp -m tcp --dport ${cfg.port}";
+    #firewallFilter = "-i ${vpnInterfaceName} -p tcp -m tcp --dport ${toString cfg.port}";
     firewallRules = ''
-      iifname "${vpnInterfaceName}" tcp dport ${cfg.port} counter accept
+      iifname "${vpnInterfaceName}" tcp dport ${toString cfg.port} counter accept
     '';
   };
 }
