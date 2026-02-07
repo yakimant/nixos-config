@@ -2,9 +2,11 @@
 
 {
   imports = [
+    ./metrics.nix
+    ./networking.nix
+    ./tailscale.nix
     ./users.nix
     ./zfs.nix
-    ./tailscale.nix
   ];
  
   environment.systemPackages = [
