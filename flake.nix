@@ -163,6 +163,17 @@
         specialArgs = { inherit inputs; };
       };
 
+      nixosConfigurations."monitoring" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          overlayModule
+          disko.nixosModules.disko
+          agenix.nixosModules.default
+          ./hosts/monitoring/configuration.nix
+        ];
+        specialArgs = { inherit inputs; };
+      };
+
       # Expose the package set, including overlays, for convenience.
       #darwinPackages = self.darwinConfigurations."yakimant-macbook-air".pkgs;
     };
