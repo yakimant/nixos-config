@@ -20,14 +20,6 @@
 
   boot.zfs.requestEncryptionCredentials = false;
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-    };
-  };
-
   networking = {
     hostName = "validator";
     hostId = "8df49230"; # random number, required for ZFS: openssl rand -hex 4

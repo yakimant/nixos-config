@@ -22,14 +22,6 @@
 
   boot.zfs.requestEncryptionCredentials = false;
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-    };
-  };
-
   networking = {
     hostName = "rock5b";
     hostId = "4d57ec25"; # random number, required for ZFS
