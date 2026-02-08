@@ -72,36 +72,40 @@
       darwinHosts =
         builtins.attrNames (nixpkgs.lib.filterAttrs (_: h: h.platform == "darwin") hosts);
 
-      stableSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
-      forAllSystems = nixpkgs.lib.genAttrs stableSystems;
-      pkgsFor = nixpkgs.lib.genAttrs stableSystems (
-        system: import nixpkgs { inherit system; config.allowUnfree = true; }
-      );
+      # For devShells generation
+      supportedSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      # pkgsFor = nixpkgs.lib.genAttrs stableSystems (
+      #   system: import nixpkgs { inherit system; config.allowUnfree = true; }
+      # );
+      mkPkgs = system: import nixpkgs { inherit system; config.allowUnfree = true; };
 
+      # Adds "pkgs.unstable"
       overlay = final: prev: let
         unstablePkgs = import nixpkgs-unstable { inherit (prev) system; config.allowUnfree = true; };
       in {
         unstable = unstablePkgs;
       };
-      # Overlays-module makes "pkgs.unstable" available in configuration.nix
       overlayModule = ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay ]; });
     in {
-      devShells = forAllSystems (system: let
-        pkgs = pkgsFor.${system};
+      devShells = forAllSystems (system:
+      let
+        pkgs = mkPkgs system;
+        isLinux = nixpkgs.lib.hasSuffix "linux" system;
       in {
         default = pkgs.mkShellNoCC {
           shellHook =
             ''
               # source .envrc.nix-config
             '';
-          packages = with pkgs.buildPackages; [
+          packages = with pkgs; [
             just
-            nix-output-monitor
             nixos-anywhere
             nixos-rebuild-ng
+          ] ++ [
             disko.packages.${system}.disko
             disko.packages.${system}.disko-install
-          ] ++ lib.optionals (system != "aarch64-darwin") [
+          ] ++ lib.optionals isLinux [
             nixos-install-tools
           ];
         };
