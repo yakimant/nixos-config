@@ -4,8 +4,6 @@
 
 {
   imports = [
-    ../../modules/base
-    ../../modules/linux
     # ../../modules/monitoring
     ./disk-config.nix
     ./hardware-configuration.nix
@@ -18,10 +16,7 @@
 
   boot.zfs.requestEncryptionCredentials = false;
 
-  networking = {
-    hostName = "monitoring";
-    hostId = "84f2cf61"; # random number, required for ZFS: openssl rand -hex 4
-  };
+  networking.hostId = "84f2cf61"; # random number, required for ZFS: openssl rand -hex 4
 
   system.stateVersion = "25.05";
 }

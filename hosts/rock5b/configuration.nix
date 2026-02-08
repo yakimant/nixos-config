@@ -4,9 +4,7 @@
 
 {
   imports = [
-    ../../modules/base
-    ../../modules/linux
-    ../../modules/ethereum
+    ../../modules/linux/ethereum
     ./disk-config.nix
     # ./hardware-configuration.nix
   ];
@@ -22,10 +20,7 @@
 
   boot.zfs.requestEncryptionCredentials = false;
 
-  networking = {
-    hostName = "rock5b";
-    hostId = "4d57ec25"; # random number, required for ZFS
-  };
+  networking.hostId = "4d57ec25"; # random number, required for ZFS
 
   system.stateVersion = "25.05";
 }

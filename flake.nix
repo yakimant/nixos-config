@@ -2,18 +2,12 @@
   description = "infra-yakimant";
 
   inputs = {
-    nixpkgs-2311.url = "github:NixOS/nixpkgs/nixos-23.11";
-    nixpkgs-2405.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-2411.url = "github:NixOS/nixpkgs/nixos-24.11";
-    nixpkgs-2505.url = "github:NixOS/nixpkgs/nixos-25.05";
-
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    nixpkgs.follows = "nixpkgs-2505";
-
     # See https://github.com/NixOS/nixpkgs/issues/107466
     #nixpkgs-darwin-unstable.follows = "nixpkgs-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -62,18 +56,27 @@
     nixpkgs-unstable,
     ... }:
     let
+      hosts = {
+        mac-mini    = { platform = "darwin"; };
+        macbook-air = { platform = "darwin"; };
+        monitoring  = { platform = "nixos";  };
+        qnap        = { platform = "nixos";  };
+        rock5b      = { platform = "nixos"; system = "aarch64-linux"; };
+        thinkpad    = { platform = "nixos";  };
+        validator   = { platform = "nixos";  };
+      };
+
+      nixosHosts =
+        builtins.attrNames (nixpkgs.lib.filterAttrs (_: h: h.platform == "nixos") hosts);
+
+      darwinHosts =
+        builtins.attrNames (nixpkgs.lib.filterAttrs (_: h: h.platform == "darwin") hosts);
+
       stableSystems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
       forAllSystems = nixpkgs.lib.genAttrs stableSystems;
       pkgsFor = nixpkgs.lib.genAttrs stableSystems (
         system: import nixpkgs { inherit system; config.allowUnfree = true; }
       );
-      overlay = final: prev: let
-        unstablePkgs = import nixpkgs-unstable { inherit (prev) system; config.allowUnfree = true; };
-      in {
-        unstable = unstablePkgs;
-      };
-      # Overlays-module makes "pkgs.unstable" available in configuration.nix
-      overlayModule = ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay ]; });
     in {
       devShells = forAllSystems (system: let
         pkgs = pkgsFor.${system};
@@ -88,91 +91,52 @@
             nix-output-monitor
             nixos-anywhere
             nixos-rebuild-ng
-            disko.packages.${system}.default
+            disko.packages.${system}.disko
+            disko.packages.${system}.disko-install
           ] ++ lib.optionals (system != "aarch64-darwin") [
             nixos-install-tools
           ];
         };
       });
 
-      darwinConfigurations."macbook-air" = nix-darwin.lib.darwinSystem {
-        modules = [
-          overlayModule
-          agenix.darwinModules.default
-          mac-app-util.darwinModules.default
-          ./hosts/macbook-air/configuration.nix
-        ];
-        specialArgs = { inherit inputs; nixpkgs = nixpkgs-darwin; };
-      };
+      nixosConfigurations = builtins.listToAttrs (builtins.map (hostname:
+        {
+          name = hostname;
+          value = nixpkgs.lib.nixosSystem {
+            system = hosts.${hostname}.system or "x86_64-linux";
+            modules = [
+              ./modules/base
+              ./modules/linux/base
+              disko.nixosModules.disko
+              agenix.nixosModules.default
+              ./hosts/${hostname}/configuration.nix
+              ({...}: { networking.hostName = hostname; })
+            ];
 
-      darwinConfigurations."mac-mini" = nix-darwin.lib.darwinSystem {
-        modules = [
-          overlayModule
-          agenix.darwinModules.default
-          mac-app-util.darwinModules.default
-          ./hosts/mac-mini/configuration.nix
-        ];
-        specialArgs = { inherit inputs; nixpkgs = nixpkgs-darwin; };
-      };
+            specialArgs = { inherit inputs; unstablePkgs = nixpkgs-unstable; };
+          };
+        }
+      ) nixosHosts);
 
-      nixosConfigurations."rock5b" = nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-#pkgs = nixpkgs.legacyPackages.${system};
-        modules = [
-          overlayModule
-          disko.nixosModules.disko
-          agenix.nixosModules.default
-          ./hosts/rock5b/configuration.nix
+      darwinConfigurations = builtins.listToAttrs (builtins.map (hostname:
+        {
+          name = hostname;
+          value = nixpkgs.lib.nixosSystem {
+            # system = "x86_64-linux";
+            modules = [
+              ./modules/base
+              ./modules/desktop.nix
+              ./modules/darwin
+              agenix.darwinModules.default
+              mac-app-util.darwinModules.default
+              ./hosts/${hostname}/configuration.nix
+              # ({...}: { networking.hostName = hostname; })
+            ];
 
-          # optional: add nixos modules via the default nixosModule
-#ethereum-nix.nixosModules.default
-        ];
-        specialArgs = { inherit inputs; };
-      };
-
-      nixosConfigurations."thinkpad" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          overlayModule
-          disko.nixosModules.disko
-          agenix.nixosModules.default
-          ./hosts/thinkpad/configuration.nix
-        ];
-        specialArgs = { inherit inputs; };
-      };
-
-      nixosConfigurations."qnap" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          overlayModule
-          disko.nixosModules.disko
-          agenix.nixosModules.default
-          ./hosts/qnap/configuration.nix
-        ];
-        specialArgs = { inherit inputs; };
-      };
-
-      nixosConfigurations."validator" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          overlayModule
-          disko.nixosModules.disko
-          agenix.nixosModules.default
-          ./hosts/validator/configuration.nix
-        ];
-        specialArgs = { inherit inputs; };
-      };
-
-      nixosConfigurations."monitoring" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          overlayModule
-          disko.nixosModules.disko
-          agenix.nixosModules.default
-          ./hosts/monitoring/configuration.nix
-        ];
-        specialArgs = { inherit inputs; };
-      };
+            specialArgs = { inherit inputs; nixpkgs = nixpkgs-darwin; unstablePkgs = nixpkgs-unstable; };
+          };
+        }
+      ) darwinHosts);
 
       # Expose the package set, including overlays, for convenience.
       #darwinPackages = self.darwinConfigurations."yakimant-macbook-air".pkgs;

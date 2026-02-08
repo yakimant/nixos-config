@@ -1,8 +1,6 @@
 {
   imports = [
-    ../../modules/base
-    ../../modules/linux
-    ../../modules/samba.nix
+    ../../modules/linux/samba.nix
     ./disk-config.nix
     ./hardware-configuration.nix
   ];
@@ -21,7 +19,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   networking = {
-    hostName = "qnap";
     hostId = "cd38793d"; # random number, required for ZFS
     #networkmanager.enable = true;
     #wireless.enable = true;

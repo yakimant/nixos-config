@@ -4,10 +4,8 @@
 
 {
   imports = [
-    ../../modules/base
-    ../../modules/linux
     ../../modules/desktop.nix
-    ../../modules/linux-desktop
+    ../../modules/linux/desktop
     ./disk-config.nix
     ./hardware-configuration.nix
   ];
@@ -26,7 +24,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   networking = {
-    hostName = "thinkpad";
     hostId = "0e9a6b56"; # random number, required for ZFS
     networkmanager.enable = true;
     #wireless.enable = true;

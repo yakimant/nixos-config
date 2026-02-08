@@ -4,9 +4,7 @@
 
 {
   imports = [
-    ../../modules/base
-    ../../modules/linux
-    ../../modules/ethereum
+    ../../modules/linux/ethereum
     ./disk-config.nix
     ./hardware-configuration.nix
   ];
@@ -20,10 +18,7 @@
 
   boot.zfs.requestEncryptionCredentials = false;
 
-  networking = {
-    hostName = "validator";
-    hostId = "8df49230"; # random number, required for ZFS: openssl rand -hex 4
-  };
+  networking.hostId = "8df49230"; # random number, required for ZFS: openssl rand -hex 4
 
   system.stateVersion = "25.05";
 }

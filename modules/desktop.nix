@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 # python, r, ruby ?
 
@@ -23,6 +23,7 @@ ansible-lint
       cachix
       cf-terraforming
       cloudflare-cli
+      codex
       colima
 #consul
       docker
@@ -78,4 +79,7 @@ ansible-lint
       yt-dlp
       zbar
   ];
+  # ] ++ (with inputs.ethereum-nix.packages.${pkgs.system}; [
+  #   staking-deposit-cli
+  # ]);
 }

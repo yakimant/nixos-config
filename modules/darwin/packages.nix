@@ -1,11 +1,11 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, unstablePkgs,... }:
 
 {
   environment.systemPackages = with pkgs; [
       inputs.agenix.packages.aarch64-darwin.default
       grandperspective
       skhd
-      unstable.yabai
+      unstablePkgs.yabai
       yubikey-manager
       xcodes
 
@@ -36,7 +36,7 @@
       autoUpdate = true;
       # updates homebrew packages on activation,
       # can make darwin-rebuild much slower (otherwise i'd forget to do it ever though)
-      upgrade = true;
+      upgrade = false;
       cleanup = "zap";
     };
 
