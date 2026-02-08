@@ -1,11 +1,11 @@
-{ inputs, pkgs, unstablePkgs,... }:
+{ inputs, pkgs,... }:
 
 {
   environment.systemPackages = with pkgs; [
       inputs.agenix.packages.aarch64-darwin.default
       grandperspective
       skhd
-      unstablePkgs.yabai
+      unstable.yabai
       yubikey-manager
       xcodes
 

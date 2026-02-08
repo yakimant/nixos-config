@@ -77,6 +77,14 @@
       pkgsFor = nixpkgs.lib.genAttrs stableSystems (
         system: import nixpkgs { inherit system; config.allowUnfree = true; }
       );
+
+      overlay = final: prev: let
+        unstablePkgs = import nixpkgs-unstable { inherit (prev) system; config.allowUnfree = true; };
+      in {
+        unstable = unstablePkgs;
+      };
+      # Overlays-module makes "pkgs.unstable" available in configuration.nix
+      overlayModule = ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay ]; });
     in {
       devShells = forAllSystems (system: let
         pkgs = pkgsFor.${system};
@@ -105,6 +113,7 @@
           value = nixpkgs.lib.nixosSystem {
             system = hosts.${hostname}.system or "x86_64-linux";
             modules = [
+              overlayModule
               ./modules/base
               ./modules/linux/base
               disko.nixosModules.disko
@@ -113,7 +122,7 @@
               ({...}: { networking.hostName = hostname; })
             ];
 
-            specialArgs = { inherit inputs; unstablePkgs = nixpkgs-unstable; };
+            specialArgs = { inherit inputs; };
           };
         }
       ) nixosHosts);
@@ -121,9 +130,10 @@
       darwinConfigurations = builtins.listToAttrs (builtins.map (hostname:
         {
           name = hostname;
-          value = nixpkgs.lib.nixosSystem {
-            # system = "x86_64-linux";
+          value = nix-darwin.lib.darwinSystem {
+            system = "aarch64-darwin";
             modules = [
+              overlayModule
               ./modules/base
               ./modules/desktop.nix
               ./modules/darwin
@@ -133,7 +143,7 @@
               # ({...}: { networking.hostName = hostname; })
             ];
 
-            specialArgs = { inherit inputs; nixpkgs = nixpkgs-darwin; unstablePkgs = nixpkgs-unstable; };
+            specialArgs = { inherit inputs; nixpkgs = nixpkgs-darwin; };
           };
         }
       ) darwinHosts);
