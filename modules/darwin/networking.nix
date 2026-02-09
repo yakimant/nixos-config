@@ -23,6 +23,14 @@
   launchd.daemons.dnscrypt-proxy.serviceConfig.UserName = lib.mkForce "root";
   users.users._dnscrypt-proxy.home = lib.mkForce "/private/var/lib/dnscrypt-proxy";
 
+  environment.etc."dnscrypt-proxy/forwarding-rules.txt".text = ''
+    # lan 192.168.0.1
+    *.torproject.org 1.1.1.1
+  '';
+
+  environment.etc."dnscrypt-proxy/cloaking-rules.txt".text = ''
+  '';
+
   services.dnscrypt-proxy = {
     enable = true;
     settings = {
@@ -38,10 +46,12 @@
       #dnscrypt_servers = true;
       #odoh_servers = false;
       #relays
-      #cloaking_rules
       #random
       #cache
       # firefox local doh
+
+      forwarding_rules = "/etc/dnscrypt-proxy/forwarding-rules.txt";
+      cloaking_rules = "/etc/dnscrypt-proxy/cloaking-rules.txt";
 
       sources.parental-control = {
         urls = [
