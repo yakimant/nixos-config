@@ -93,6 +93,7 @@
         "brave-browser"
         "bruno"
         "chatgpt"
+        "codex-app"
         "cold-turkey-blocker"
         "contexts"
         "cyberduck"
