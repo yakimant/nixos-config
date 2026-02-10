@@ -25,7 +25,8 @@
 
   environment.etc."dnscrypt-proxy/forwarding-rules.txt".text = ''
     # lan 192.168.0.1
-    *.torproject.org 1.1.1.1
+    *.torproject.org 1.1.1.1,1.0.0.1
+    *.github.blog 1.1.1.1,1.0.0.1
   '';
 
   environment.etc."dnscrypt-proxy/cloaking-rules.txt".text = ''
