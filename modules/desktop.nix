@@ -23,7 +23,7 @@ ansible-lint
       cachix
       cf-terraforming
       cloudflare-cli
-      codex
+      unstable.codex
       colima
 #consul
       docker
