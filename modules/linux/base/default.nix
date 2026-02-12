@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../disk-config.nix
     ./metrics.nix
     ./networking.nix
     ./tailscale.nix
