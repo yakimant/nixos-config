@@ -7,6 +7,10 @@
         content = {
           type = "gpt";
           partitions = {
+            boot = {
+              size = "1M";
+              type = "EF02";
+            };
             ESP = {
               size = "1G";
               type = "EF00";
@@ -25,7 +29,7 @@
               };
             };
             swap = {
-              size = "8G";
+              size = "100%";
               content = {
                 type = "swap";
                 randomEncryption = true;
