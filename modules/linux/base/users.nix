@@ -3,7 +3,7 @@
 {
   age.secrets = {
     "users/yakimant/pass-hash" = {
-      file = ../../secrets/users/yakimant/pass-hash.age;
+      file = ../../../secrets/users/yakimant/pass-hash.age;
     };
   };
 

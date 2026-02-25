@@ -5,7 +5,7 @@ let
 in {
   age.secrets = {
     "service/tailscale/${hostname}" = {
-      file = ../../secrets/service/tailscale/${hostname}.age;
+      file = ../../../secrets/service/tailscale/${hostname}.age;
     };
   };
 
