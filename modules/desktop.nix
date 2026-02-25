@@ -23,9 +23,10 @@ ansible-lint
       cachix
       cf-terraforming
       cloudflare-cli
-      unstable.codex
+      # unstable.codex
       colima
 #consul
+      csvkit
       docker
       doctl
 #element-desktop # SSO doesn't work on macOS
@@ -50,8 +51,11 @@ ansible-lint
       nixos-anywhere
       # nixos-rebuild
       nixos-rebuild-ng
+      nixfmt
+      alejandra
       nodejs_24
       oath-toolkit
+      pgloader
       opentofu
       p7zip
       pass
@@ -60,9 +64,10 @@ ansible-lint
       pinentry-tty
       pkg-config
       postgresql_16
+      q-text-as-data
       qemu_kvm
       qrencode
-#qsv
+      qsv
       s3cmd
       s5cmd
       shellcheck
@@ -78,7 +83,8 @@ ansible-lint
       yubikey-manager
       yt-dlp
       zbar
-  ];
+  ] ++ [inputs.llm-agents.packages.${pkgs.system}.codex];
+  # ];
   # ] ++ (with inputs.ethereum-nix.packages.${pkgs.system}; [
   #   staking-deposit-cli
   # ]);
