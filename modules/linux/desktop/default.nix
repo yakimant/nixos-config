@@ -4,6 +4,7 @@
     ./sway.nix
     ./keyd.nix
     ./bluetooth.nix
+    ./virtualization.nix
   ];
 
   programs.ssh.startAgent = true;
