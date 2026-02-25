@@ -40,6 +40,7 @@ in {
     # https://github.com/NixOS/nixpkgs/pull/408290
     #nerdlog
     nmap
+    nps
     openssh
     openssl
     # wait for nixpkgs?
