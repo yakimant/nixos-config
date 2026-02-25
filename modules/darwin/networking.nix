@@ -1,4 +1,4 @@
-{ lib,... }:
+{ lib, ... }:
 
 {
   networking = {
@@ -12,30 +12,31 @@
     # TODO: nixos 25.11
     #applicationFirewall.enable = true;
     # networksetup -listallnetworkservices
-    knownNetworkServices = [
-      "USB 10/100/1000 LAN"
-      "Wi-Fi"
-      "Ethernet"
-    ];
+    knownNetworkServices = [ "USB 10/100/1000 LAN" "Wi-Fi" "Ethernet" ];
   };
 
   # https://github.com/nix-darwin/nix-darwin/issues/1408
   launchd.daemons.dnscrypt-proxy.serviceConfig.UserName = lib.mkForce "root";
-  users.users._dnscrypt-proxy.home = lib.mkForce "/private/var/lib/dnscrypt-proxy";
+  users.users._dnscrypt-proxy.home =
+    lib.mkForce "/private/var/lib/dnscrypt-proxy";
 
-  environment.etc."dnscrypt-proxy/forwarding-rules.txt".text = ''
+  environment.etc."dnscrypt-proxy/forwarding-rules.txt".text = let
+    dns = "1.1.1.1,1.0.0.1";
+
+    whitelistDomains =
+      [ "*.torproject.org" "*.github.blog" "annas-archive.li" ];
+  in ''
     # lan 192.168.0.1
-    *.torproject.org 1.1.1.1,1.0.0.1
-    *.github.blog 1.1.1.1,1.0.0.1
-  '';
+  '' + lib.concatMapStrings (d: ''
+    ${d} ${dns}
+  '') whitelistDomains;
 
-  environment.etc."dnscrypt-proxy/cloaking-rules.txt".text = ''
-  '';
+  environment.etc."dnscrypt-proxy/cloaking-rules.txt".text = "";
 
   services.dnscrypt-proxy = {
     enable = true;
     settings = {
-      listen_addresses = ["127.0.0.1:53"];
+      listen_addresses = [ "127.0.0.1:53" ];
 
       require_dnssec = true;
       require_nolog = true;
@@ -61,7 +62,8 @@
           "https://cdn.staticaly.com/gh/DNSCrypt/dnscrypt-resolvers/master/v3/parental-control.md"
         ];
         cache_file = "parental-control.md";
-        minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
+        minisign_key =
+          "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
         refresh_delay = 72;
       };
     };
