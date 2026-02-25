@@ -1,6 +1,17 @@
 {
   description = "infra-yakimant";
 
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://cache.numtide.com"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+    ];
+  };
+
   inputs = {
     # See https://github.com/NixOS/nixpkgs/issues/107466
     #nixpkgs-darwin-unstable.follows = "nixpkgs-unstable";
@@ -39,9 +50,12 @@
     # remove backup/restore libs broke nimbus
     ethereum-nix = {
       url = "github:nix-community/ethereum.nix/8f01580481e88e169b7ada56f1500dccd6cefe61";
-      inputs = {
-        nixpkgs.follows = "nixpkgs-unstable";
-      };
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
@@ -49,6 +63,7 @@
     agenix,
     disko,
     ethereum-nix,
+    llm-agents,
     mac-app-util,
     nix-darwin,
     nixpkgs,
