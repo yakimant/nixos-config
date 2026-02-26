@@ -1,6 +1,10 @@
-TODO:
+# monitoring host
 
-Prepare host config:
+Running on Hetzner Cloud with BIOS (not UEFI) firmware.
+
+## TODO
+
+## Host preparation
 
 1. Create a VM
 
@@ -37,10 +41,12 @@ agenix -e service/tailscale/hostname.age
 agenix --rekey
 ```
 
-6. Add to flake.nix
-
-Setup:
+## Installation
 
 1. just nixos-anywhere
-2. looks like trusted node sync doesnt work, run manualy
-2. jwt-secret: `openssl rand -hex 32`
+
+## Recovery
+
+- `hcloud server rebuild monitoring --image 'ubuntu-22.04'`
+- `terraform apply -replace='hcloud_server.monitoring'`
+- `ssh-keygen -R`
